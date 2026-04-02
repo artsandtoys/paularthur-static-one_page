@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>hi i'm paul</title>
     <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
 <style>
-    
 body {
     background-color: #000;
     color: #fff;
@@ -19,11 +17,6 @@ body {
     display: flex;
     min-height: 100vh;
     box-sizing: border-box;
-}
-
-h1, h2 {
-    margin-top: 0;
-    margin-bottom: 0;
 }
 
 /* MAIN CONTAINER */
@@ -56,58 +49,43 @@ h1, h2 {
     margin-top: 14vh;
 }
 
-.left-content h1, .left-content h2 {
-    margin: 0;
-}
-
 .description-text {
     color: #ddd;
     font-size: 16px;
-    font-weight: normal;
     line-height: 1.5;
     margin-top: 16px;
     margin-bottom: 16px;
 }
 
-/* LEFT NAV LINKS */
+/* NAV LINKS */
 .left-content nav a {
     color: #fff;
     text-decoration: none;
     display: block;
     margin: 10px 0;
     padding: 5px 0px;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    font-weight: normal; /* Default weight */
 }
 
 .left-content nav a:hover {
     color: #b3ff00;
 }
 
+/* THE ACTIVE STATE */
 .left-content nav a.active {
     color: #b3ff00;
-    font-weight: bold;
+    font-weight: bold; /* This makes it bold when clicked */
 }
 
 /* RIGHT COLUMN */
 .right-column-wrapper {
     flex-basis: 66.66%;
     flex-grow: 1;
-    overflow-y: auto;
     margin-top: 0.5vh;
     padding-top: 16vh;
     padding-left: 20px;
     box-sizing: border-box;
-    position: relative;
-}
-
-.right-column-wrapper h2 {
-    margin: 0 0 8px 0;
-}
-
-#about-me p, .right-column-wrapper p {
-    color: #ddd;
-    line-height: 1.5;
-    margin-bottom: 16px;
 }
 
 .content-section {
@@ -137,12 +115,6 @@ h1, h2 {
     padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
-    transition: color 0.3s ease;
-}
-
-.timeline-item-link:hover {
-    color: #22cc33;
-    cursor: pointer;
 }
 
 .timeline-item-link::before {
@@ -154,572 +126,182 @@ h1, h2 {
     height: 8px;
     background: #b3ff00;
     border-radius: 50%;
-    z-index: 1;
 }
 
-.timeline-date {
-    color: #ccc;
-}
-
-/* POPUP GALLERY */
-#columnPopup {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  cursor: pointer;
-}
-
-#columnPopup img {
-  max-width: 99%;
-  max-height: 99%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  object-fit: contain;
-  opacity: 0.94; /* preserve original opacity */
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-
-.gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2em;
-  cursor: pointer;
-  padding: 20px;
-  user-select: none;
-  z-index: 10000;
-}
-
-#prevBtn { left: 30px; }
-#nextBtn { right: 30px; }
-
-.gallery-btn:hover {
-  color: #b3ff00;
-}
-
-/* --- 1. Corrected Grid Container (using CSS Grid) --- */
+/* GRID & LIGHTBOX */
 .grid-container {
-    /* Layout: CSS Grid is the proper tool for a strict 9x9 layout */
     display: grid;
-    /* This creates exactly 9 columns, each taking up an equal fraction (1fr) of the space */
     grid-template-columns: repeat(3, 1fr); 
-    
-    /* Spacing: Creates a consistent gap between grid items */
     gap: 10px; 
-
-    /* Alignment & Sizing */
-    margin: 0 0 0 auto; /* Aligns the entire container to the right */
-    width: 90vw;
     max-width: 800px; 
 }
 
-/* --- 2. Image Styling --- */
 .grid-container img {
-    /* In CSS Grid, the image width is handled automatically by the '1fr' columns. 
-       We only need to ensure the image fills its grid cell and has square dimensions. */
     width: 100%; 
-    /* Important: This ensures the image fills the 1fr height */
-    /* height: 100%; */ 
-    /* Optional: Forces cells to be square for a classic grid look */
-    /* aspect-ratio: 1 / 1; */ 
-    
     cursor: pointer;
-    display: block;
-    object-fit: cover; /* Ensures the image covers the area of the cell */
+    object-fit: cover;
 }
 
-/* --- 3. Lightbox Styling (Improvements) --- */
 .lightbox {
-    /* Use 'fixed' to cover the whole viewport, regardless of scrolling */
     position: fixed; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    
-    /* Display: Use flex to center the content */
+    left: 0; top: 0;
+    width: 100%; height: 100%; 
     display: none; 
     justify-content: center; 
     align-items: center; 
-    
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.9);
 }
 
 .lightbox-content {
-    display: block;
-    max-width: 50%; 
-    /* Ensures the image respects the height of the viewport */
-    /*max-height: 90vh;*/
-    object-fit: contain; /* Prevents the image from being cropped */
+    max-width: 80%; 
+    object-fit: contain;
 }
-/* -------------------------------------- */
-/* MOBILE RESPONSIVE */
-@media (max-width: 800px) {
-    .main-container {
-        width: 84%;
-        flex-direction: column;
-        margin: 0px 4px;
-    }
 
-    .left-column {
-        position: static;
-        width: 100%;
-        padding-right: 0;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .left-content {
-        width: 100%;
-        text-align: left;
-        margin-top: 0;
-        padding-top: 0;
-    }
-
-    .left-content nav a {
-        display: inline-block;
-        margin: 0;
-    }
-
-    .right-column-wrapper {
-        flex-basis: 100%;
-        padding-left: 0;
-        padding-top: 0;
-    }
+/* POPUP GALLERY */
+#columnPopup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
 
 .gallery-btn {
-    font-size: 2.5em;
-    padding: 10px;
-  }
+  background: none; border: none;
+  color: #fff; font-size: 2em;
+  cursor: pointer; padding: 20px;
 }
 
-.grid-container {
-        /* Change to a single column */
-        grid-template-columns: 1fr; 
-        gap: 10px; 
-        margin: 0;
-    }
-    
-    /* Optional: If you want to center the container when it's narrow */
-    .grid-container {
-        max-width: 99%; /* Give it 5% margin space on small screens */
-    }
-
+/* MOBILE */
+@media (max-width: 800px) {
+    .main-container { width: 95%; flex-direction: column; }
+    .left-column { position: static; height: auto; width: 100%; }
+    .left-content nav a { display: inline-block; margin-right: 15px; }
+}
 </style>
-
 </head>
 
 <body>
 
 <div class="main-container">
-
-  <!-- LEFT COLUMN -->
     <div class="left-column">
-    <div class="left-content">
-        <h1>Paul Arthur</h1>
-        <br>
-        <h2>Creative Technologist</h2>
-
-        <div class="description-text">
-            Audio / Visual Artist and Storyteller
-        </div>
-
-        <nav>
-            <a href="#about-me">about &ensp;</a>
-            <a href="#projects">works &ensp;</a>
-            <a href="#visuals">visual &ensp;</a>
-        </nav>
-    </div>
-    </div>
-
-  <!-- RIGHT COLUMN -->
-  <div class="right-column-wrapper">
-
-    <section id="about-me" class="content-section">
-      <h2>about</h2>
-      <p> 
-        I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment. 
-        <br>
-        My passion is for designing immersive experiences and games by worldbuilding with micro stories.
-      </p> 
-    </section>
-
-    <section id="projects" class="content-section">
-      <h2>works</h2>
-        <br> 
-
-        <!-- TIMELINE -->
-        <div class="timeline">
-        <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date"><i>2023 - </i></div>
-            <div class="timeline-title">Meta Start</div>
-            <p style="color: #ddd;">Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
-        </a>
-
-        <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2021</div>
-            <div class="timeline-title">Endless Bloom EP</div>
-            <p style="color: #ddd;">My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label distributor sign and release it.</p>
-        </a>
-
-        <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
-            <div class="timeline-date">2020 - 2021</div>
-            <div class="timeline-title">Oculus Launch Pad</div>
-            <p style="color: #ddd;">1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
-        </a>
-            
-        <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2020 - </div>
-            <div class="timeline-title">Cyberspace Station mini-game series</div>
-            <p style="color: #ddd;">A new beginning, new frontier, and new roles to play...</p>
-        </a>
-
-        <!-- POPUP GALLERY -->
-          <div id="columnPopup">
-            <button id="prevBtn" class="gallery-btn">&#10094;</button>
-            <img id="popupImage" src="" alt="Popup Image">
-            <button id="nextBtn" class="gallery-btn">&#10095;</button>
-          </div>      
-      </div>
-        
-    <section id="visuals" class="content-section" >
-    <br>
-    <br>
-        <h2>snaps</h2>
+        <div class="left-content">
+            <h1>Paul Arthur</h1>
             <br>
-            <!-- pictures here -->
+            <h2>Creative Technologist</h2>
+            <div class="description-text">Audio / Visual Artist and Storyteller</div>
+
+            <nav id="main-nav">
+                <a href="#about-me" class="nav-link active">about &ensp;</a>
+                <a href="#projects" class="nav-link">works &ensp;</a>
+                <a href="#visuals" class="nav-link">visual &ensp;</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="right-column-wrapper">
+        <section id="about-me" class="content-section">
+            <h2>about</h2>
+            <p>I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment.</p> 
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2>works</h2>
+            <div class="timeline">
+                <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++.png">
+                    <div class="timeline-date"><i>2023 - </i></div>
+                    <div class="timeline-title">Meta Start</div>
+                    <p>Joined the Meta Horizon Start program.</p>
+                </a>
+            </div>
+
+            <div id="columnPopup">
+                <button id="prevBtn" class="gallery-btn">&#10094;</button>
+                <div id="mediaContainer" style="display:flex; justify-content:center; align-items:center; max-width:80%;"></div>
+                <button id="nextBtn" class="gallery-btn">&#10095;</button>
+            </div>      
+        </section>
+
+        <section id="visuals" class="content-section">
+            <h2>snaps</h2>
             <div class="grid-container">
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur dance music" onclick="openLightbox(this)"> 
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur house music" onclick="openLightbox(this)"> 
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur house music" onclick="openLightbox(this)"> 
-                
-              <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-                <span class="close-button"></span>
-                <img id="lightbox-image" class="lightbox-content" src="" alt="">
-              </div>
+                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
             </div> 
-    </section>
+            
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <img id="lightbox-image" class="lightbox-content" src="">
+            </div>
+        </section>
 
-      <!-- END -->
-      <div style="height: 80px;"></div>
-      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
-      <br>
-        <br>
-      <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
-    </section>
-
-  </div>
+        <div style="height: 80px;"></div>
+        <p><small><i>design by: artsandtoys</i></small></p>
+    </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-    // -----------------------------------------------------------------
-    // 1. GLOBAL ELEMENT SELECTORS
-    // -----------------------------------------------------------------
-
-    const rightColumn = document.querySelector('.right-column-wrapper');
-    const navLinks = document.querySelectorAll('.left-content nav a.nav-link');
+document.addEventListener('DOMContentLoaded', () => {
     
-    // Selectors for elements that might be hidden when dynamic content loads
-    const defaultSplash = document.getElementById('splash-content'); // (Not used in the provided HTML, but kept for context)
-    const staticFooter = document.getElementById('static-footer');    // (Not used in the provided HTML, but kept for context)
-    
-    // GALLERY STATE VARIABLES
+    // --- 1. NAV BOLDING LOGIC ---
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked
+            this.classList.add('active');
+        });
+    });
+
+    // --- 2. GALLERY POPUP LOGIC ---
+    const popup = document.querySelector('#columnPopup');
+    const mediaContainer = document.querySelector('#mediaContainer');
     let currentGallery = [];
     let currentIndex = 0;
-    let keyboardListenerAdded = false;
 
-    // -----------------------------------------------------------------
-    // 2. CORE UTILITY FUNCTIONS
-    // -----------------------------------------------------------------
-
-    /**
-     * Removes the 'active' class from all navigation links.
-     */
-    function removeActiveClasses() {
-        navLinks.forEach(link => link.classList.remove('active'));
-    }
-
-    /**
-     * Hides default content elements (splash/footer) and clears the right column.
-     * This prepares the column for new content loaded via fetch.
-     */
-        
-    function hideDefaultContent() {
-        if (defaultSplash) defaultSplash.style.display = 'none';
-        if (staticFooter) staticFooter.style.display = 'none';
-        
-        // Clear previous content
-        rightColumn.innerHTML = ''; 
-    }
-
-    /**
-     * Fetches an HTML file, injects it into the right column, and re-attaches events.
-     * @param {string} fileName - The name of the HTML file to load.
-     */
-    async function loadContent(fileName) {
-        // 1. Prepare the column
-        hideDefaultContent(); 
-        
-        try {
-            const response = await fetch(fileName);
-            if (!response.ok) {
-                throw new Error(`Failed to load content file: ${fileName}`);
-            }
-            const htmlContent = await response.text();
-
-            // 2. Insert new HTML and scroll to top
-            rightColumn.innerHTML = htmlContent;
-            window.scrollTo(0, 0); 
-
-            // 3. Re-attach gallery event listeners (CRITICAL for dynamically loaded content)
-            attachGalleryTriggers(); 
-
-        } catch (error) {
-            console.error('Content loading error:', error);
-            rightColumn.innerHTML = `<h2>Error</h2><p>Could not load content for ${fileName}. Please ensure <code>${fileName}</code> exists in the same directory.</p>`;
-        }
-    }
-
-    // -----------------------------------------------------------------
-    // 3. GALLERY / POP-UP LOGIC
-    // -----------------------------------------------------------------
-
-    /**
-     * Stops any currently playing video and removes all media (img/video) 
-     * from the pop-up container to prepare for the next item.
-     * @param {HTMLElement} popup - The gallery pop-up container element.
-     */
-        
-    function clearMedia(popup) {
-        popup.querySelectorAll('img, video').forEach(el => {
-            if (el.tagName && el.tagName.toLowerCase() === 'video') {
-                try { el.pause(); } catch (err) {}
-                el.removeAttribute('src');
-            }
-            el.remove();
-        });
-    }
-
-    /**
-     * Loads and displays the image or video at the current index in the pop-up.
-     * @param {HTMLElement} popup - The gallery pop-up container.
-     * @param {HTMLElement} prevBtn - The previous button element (used for positioning).
-     * @param {HTMLElement} nextBtn - The next button element (used for positioning).
-     * @param {number} index - The index of the media in the currentGallery array.
-     */
-        
-    function showMedia(popup, prevBtn, nextBtn, index) {
-        clearMedia(popup);
+    function showMedia(index) {
+        mediaContainer.innerHTML = '';
         const src = currentGallery[index];
-        if (!src) return;
-
-        const isVideo = src.match(/\.(mp4|webm)(\?.*)?$/i);
-        // Media is inserted before the next button to keep buttons visible on top
-        const insertionPoint = nextBtn; 
-
-        if (isVideo) {
-            const video = document.createElement('video');
-            video.src = src;
-            video.controls = true;
-            video.autoplay = true;
-            video.muted = true;
-            video.loop = true;
-            video.playsInline = true;
-            video.style.maxWidth = '100%';
-            video.maxHeight = '100%';
-            // Insert video element into the popup
-            popup.insertBefore(video, insertionPoint);
-
-            video.addEventListener('error', (ev) => console.warn('Video error', ev));
-            video.play().catch(err => {
-                console.warn('Play promise rejected:', err);
-            });
-        } else {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = 'Gallery image';
-            img.style.maxWidth = '100%';
-            img.maxHeight = '100%';
-            // Insert image element into the popup
-            popup.insertBefore(img, insertionPoint);
-        }
-        
-        // Update current index after successful display
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '100%';
+        mediaContainer.appendChild(img);
         currentIndex = index;
     }
-    
-    /**
-     * Defines and attaches all event listeners for the gallery pop-up.
-     * This function MUST be run for both initial content AND after loading new content.
-     */
-        
-    function attachGalleryTriggers() {
-        // Find the pop-up elements inside the currently loaded content
-        // The ID columnPopup is in your main HTML for the 'works' section
-        const popup = document.querySelector('#columnPopup'); 
-        if (!popup) return;
 
-        const prevBtn = popup.querySelector('#prevBtn');
-        const nextBtn = popup.querySelector('#nextBtn');
-        
-        // Define the click handler for the timeline links
-        const galleryTriggerHandler = function(e) {
+    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // 1. Parse the list of images/videos from the data attribute
-            currentGallery = e.currentTarget.dataset.images.split(',').map(x => x.trim()).filter(x => x.length);
-            currentIndex = 0; // Always start at the first item
-            
-            // 2. Show the first piece of media and display the pop-up
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
+            currentGallery = trigger.dataset.images.split(',');
+            showMedia(0);
             popup.style.display = 'flex';
-        };
-
-        // Attach click listeners to all timeline items with the 'gallery-trigger' class
-        document.querySelectorAll('.gallery-trigger').forEach(item => {
-            // Remove previous listeners (needed when content is reloaded)
-            item.removeEventListener('click', galleryTriggerHandler); 
-            item.addEventListener('click', galleryTriggerHandler);
-        });
-        
-        // ATTACH NAV BUTTON EVENTS
-        nextBtn.onclick = (e) => {
-            e.stopPropagation(); // Prevent background click from closing
-            if (!currentGallery.length) return;
-            currentIndex = (currentIndex + 1) % currentGallery.length; // Loop to start
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
-        };
-
-        prevBtn.onclick = (e) => {
-            e.stopPropagation(); // Prevent background click from closing
-            if (!currentGallery.length) return;
-            // Loop to end if moving back from the start
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; 
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
-        };
-
-        // ATTACH CLOSE EVENT (Close when clicking the semi-transparent background)
-        popup.onclick = (e) => {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-                const vid = popup.querySelector('video');
-                if (vid) vid.pause();
-                clearMedia(popup); 
-            }
-        };
-
-        // ATTACH KEYBOARD EVENTS (Add only once to the document)
-        if (!keyboardListenerAdded) {
-            document.addEventListener('keydown', keyboardHandler);
-            keyboardListenerAdded = true;
-        }
-    }
-    
-    /**
-     * Handles keyboard shortcuts for the pop-up (Escape to close, Arrows to navigate).
-     */
-    function keyboardHandler(e) {
-        const popup = document.querySelector('#columnPopup'); 
-        
-        if (popup && popup.style.display === 'flex') {
-            const prevBtn = popup.querySelector('#prevBtn');
-            const nextBtn = popup.querySelector('#nextBtn');
-            
-            if (e.key === 'Escape') {
-                // Manually trigger the background close action
-                popup.click(); 
-            }
-            if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
-            if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
-        }
-    }
-
-    // -----------------------------------------------------------------
-    // 4. EVENT ATTACHMENT / INITIALIZATION
-    // -----------------------------------------------------------------
-
-    // --- NAV LINK CLICK HANDLER ---
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            const contentFile = this.getAttribute('data-content-file');
-            if (contentFile) {
-                loadContent(contentFile);
-                
-                removeActiveClasses();
-                this.classList.add('active');
-            }
         });
     });
-    
-    // 🚀 THE FIX: INITIALIZE GALLERY FOR DEFAULT CONTENT
-    // This is the critical addition to make the 'works' section (present on load) functional.
-    attachGalleryTriggers();
-    
-    // --- Disable right-click on the entire page --- 
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        alert("Right-click is disabled on this page.");
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) popup.style.display = 'none';
     });
+
+    // --- 3. CONTEXT MENU ---
+    document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
-// =================================================================
-// SECONDARY LIGHTBOX FUNCTIONS (FOR GRID CONTENT, IF USED)
-// =================================================================
-// These functions appear to be for a separate image grid (e.g., in snaps.html)
-// and rely on a different lightbox structure than the timeline pop-up (#columnPopup).
-
-/**
- * Opens a simple image lightbox used for grid elements.
- * @param {HTMLElement} element - The grid image element that was clicked.
- */
-    
-function openLightbox(element) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-
-    const fullSrc = element.getAttribute('data-full-src');
-    if (!fullSrc) {
-        console.error('Image element missing data-full-src attribute.');
-        return;
-    }
-
-    lightboxImage.src = fullSrc;
-    lightbox.style.display = 'flex'; 
-
-    document.body.style.overflow = 'hidden'; 
+// --- 4. LIGHTBOX FUNCTIONS ---
+function openLightbox(el) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-image');
+    img.src = el.getAttribute('data-full-src');
+    lb.style.display = 'flex';
 }
 
-/**
- * Closes the simple image lightbox.
- */
 function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    
-    lightbox.style.display = 'none';
-    
-    document.body.style.overflow = '';
-    
-    document.getElementById('lightbox-image').src = '';
+    document.getElementById('lightbox').style.display = 'none';
 }
-    
 </script>
-    
+
 </body>
-    
 </html>

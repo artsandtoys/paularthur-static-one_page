@@ -425,7 +425,6 @@ h1, h2 {
     
 <script>
         
- // -- NAV ACTIVE LINKS --
  document.addEventListener('DOMContentLoaded', () => {
     const target = document.getElementById('content-target');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -436,126 +435,88 @@ h1, h2 {
     let currentGallery = [];
     let currentIndex = 0;
 
-    /**
-     * 1. DYNAMIC CONTENT LOADER
-     * Fetches HTML files and injects them into the right column.
-     */
+    // --- 1. DYNAMIC CONTENT LOADER ---
     async function loadContent(file) {
         try {
             const response = await fetch(file);
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!response.ok) throw new Error('File not found');
             const html = await response.text();
             
             target.innerHTML = html;
             window.scrollTo(0, 0); 
-
-            // CRITICAL: Re-scan the new HTML for gallery triggers
-            attachGalleryEvents();
+            // Note: We no longer need to call a "re-bind" function here 
+            // because Event Delegation (Step 3) handles it automatically!
         } catch (err) {
-            console.error("Failed to load content:", err);
-            target.innerHTML = `<p>Error loading content. Please check if ${file} exists.</p>`;
+            console.error("Fetch error:", err);
         }
     }
 
-    /**
-     * 2. NAVIGATION HANDLER
-     */
+    // --- 2. NAVIGATION CLICK HANDLER ---
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const file = link.getAttribute('data-content-file');
-            if (!file) return;
-
-            // UI Feedback
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-
-            loadContent(file);
+            loadContent(link.getAttribute('data-content-file'));
         });
     });
 
-    /**
-     * 3. GALLERY EVENT BINDING
-     * Scans the page for any element with the 'gallery-trigger' class.
-     */
-    function attachGalleryEvents() {
-        const triggers = document.querySelectorAll('.gallery-trigger');
+    // --- 3. THE "BULLETPROOF" CLICK WATCHER (Event Delegation) ---
+    // Instead of binding to images, we bind to the 'target' container.
+    // This works even for images that don't exist yet!
+    target.addEventListener('click', (e) => {
+        // Check if the clicked element (or its parent) has the 'gallery-trigger' class
+        const trigger = e.target.closest('.gallery-trigger');
         
-        triggers.forEach(trigger => {
-            // Remove old listener if exists to prevent double-firing
-            trigger.onclick = (e) => {
-                e.preventDefault();
-                
-                // Get images from data-images (comma separated) or fallback to src
-                const data = trigger.dataset.images || trigger.getAttribute('src');
+        if (trigger) {
+            e.preventDefault();
+            // Use 'data-images' first, then 'data-full-src', then just the 'src'
+            const data = trigger.dataset.images || trigger.getAttribute('data-full-src') || trigger.src;
+            
+            if (data) {
                 currentGallery = data.split(',').map(s => s.trim());
                 currentIndex = 0;
-                
                 openPopup();
-            };
-        });
-    }
+            }
+        }
+    });
 
-    /**
-     * 4. POPUP & MEDIA RENDERING
-     */
+    // --- 4. POPUP ENGINE ---
     function openPopup() {
         renderMedia();
         popup.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Stop background scrolling
+        document.body.style.overflow = 'hidden'; 
     }
 
     function renderMedia() {
-        // Clear existing img or video tags inside the popup
-        popup.querySelectorAll('img, video').forEach(m => m.remove());
+        popup.querySelectorAll('.popup-media').forEach(m => m.remove());
         
         const src = currentGallery[currentIndex];
         const isVideo = src.match(/\.(mp4|webm|mov)/i);
-        
-        // Create the correct element type
         const mediaElement = isVideo ? document.createElement('video') : document.createElement('img');
         
         mediaElement.src = src;
         mediaElement.className = 'popup-media';
         
         if (isVideo) {
-            mediaElement.controls = true;
-            mediaElement.autoplay = true;
-            mediaElement.muted = true; 
-            mediaElement.loop = true;
-            mediaElement.playsInline = true;
+            Object.assign(mediaElement, { controls: true, autoplay: true, muted: true, loop: true, playsInline: true });
         }
         
-        // Insert before the Next button to keep buttons on top
         popup.insertBefore(mediaElement, nextBtn);
     }
 
-    // GALLERY NAVIGATION
-    nextBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % currentGallery.length;
-        renderMedia();
-    };
-
-    prevBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-        renderMedia();
-    };
-
-    // CLOSE ACTIONS
+    // --- 5. CONTROLS ---
+    nextBtn.onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; renderMedia(); };
+    prevBtn.onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; renderMedia(); };
+    
     popup.onclick = (e) => {
-        if (e.target === popup || e.target.classList.contains('popup-media')) {
+        if (e.target === popup || e.target.id === 'closeBtn') {
             popup.style.display = 'none';
-            document.body.style.overflow = ''; 
-            // Stop any playing video
+            document.body.style.overflow = '';
             const vid = popup.querySelector('video');
             if (vid) vid.pause();
         }
     };
-
-    // INITIALIZE
-    attachGalleryEvents();
 });
 </script>
 

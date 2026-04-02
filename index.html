@@ -270,6 +270,7 @@ h1, h2 {
         <nav>
             <a href="#about-me">about &ensp;</a>
             <a href="#projects">works &ensp;</a>
+            <a href="#visuals">visual &ensp;</a>
         </nav>
     </div>
     </div>
@@ -325,6 +326,27 @@ h1, h2 {
             <button id="nextBtn" class="gallery-btn">&#10095;</button>
           </div>      
       </div>
+
+    <section id="visuals" class="content-section" >
+        <h2>snaps</h2>
+            <br>
+            <!-- pictures here -->
+            <div class="grid-container">
+                <img src="images/gallery/endless_nights-01-a_manhattan+.png" data-full-src="images/gallery/endless_nights-01-a_manhattan+.png" alt="dj paul arthur dance music" onclick="openLightbox(this)"> 
+                    <video src="images/gallery/pa-a_manhattan-y2k-web.mp4" 
+                    data-full-src="images/gallery/pa-a_manhattan-y2k-web.mp4" 
+                    autoplay muted loop playsinline 
+                    style="width: 100%; cursor: pointer; object-fit: cover;" 
+                    onclick="openLightbox(this)">
+                    </video>
+                <img src="images/gallery/endless_nights-01-a_manhattan+.png" data-full-src="images/gallery/endless_nights-01-a_manhattan+.png" alt="dj paul arthur house music" onclick="openLightbox(this)"> 
+  
+              <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <span class="close-button"></span>
+                <img id="lightbox-image" class="lightbox-content" src="" alt="">
+              </div>
+            </div> 
+    </section>
 
       <!-- END -->
       <div style="height: 80px;"></div>

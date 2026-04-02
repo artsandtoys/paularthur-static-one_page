@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', () => {
 
     // -----------------------------------------------------------------
@@ -288,4 +287,3 @@ function closeLightbox() {
     
     document.getElementById('lightbox-image').src = '';
 }
-</script>

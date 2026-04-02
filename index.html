@@ -8,7 +8,7 @@
     <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
 <style>
-/* Ensure smooth scrolling behavior for the whole document */
+/* Smooth scrolling for the whole page */
 html {
     scroll-behavior: smooth;
 }
@@ -94,7 +94,7 @@ h1, h2 {
     flex-basis: 66.66%;
     flex-grow: 1;
     margin-top: 0.5vh;
-    padding-top: 16vh;
+    padding-top: 16vh; /* Original landing spot for 'About' */
     padding-left: 20px;
     box-sizing: border-box;
     position: relative;
@@ -112,8 +112,8 @@ h1, h2 {
 
 .content-section {
     padding: 32px 0;
-    /* Added scroll-margin-top to prevent "loading too high" */
-    scroll-margin-top: 15vh; 
+    /* This tells the browser to stop 18% from the top of the screen */
+    scroll-margin-top: 18vh; 
 }
 
 /* TIMELINE */
@@ -151,10 +151,6 @@ h1, h2 {
     background: #b3ff00;
     border-radius: 50%;
     z-index: 1;
-}
-
-.timeline-date {
-    color: #ccc;
 }
 
 /* POPUP GALLERY */
@@ -212,7 +208,7 @@ h1, h2 {
 
 <div class="main-container">
 
-  <div class="left-column">
+    <div class="left-column">
     <div class="left-content">
         <h1>Paul Arthur</h1>
         <br>
@@ -251,19 +247,19 @@ h1, h2 {
             <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
                 <div class="timeline-date">2021</div>
                 <div class="timeline-title">Endless Bloom EP</div>
-                <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label distributor sign and release it.</p>
+                <p>Crafted 3D visuals and electronic music signed by a label distributor.</p>
             </a>
 
             <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
                 <div class="timeline-date">2020 - 2021</div>
                 <div class="timeline-title">Oculus Launch Pad</div>
-                <p>1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad.</p>
+                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad.</p>
             </a>
                 
             <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
                 <div class="timeline-date">2020 - </div>
                 <div class="timeline-title">Cyberspace Station mini-game series</div>
-                <p>A new beginning, new frontier, and new roles to play...</p>
+                <p>A new frontier and new roles to play...</p>
             </a>
         </div>
     </section>
@@ -278,7 +274,7 @@ h1, h2 {
         </div> 
     </section>
 
-    <div style="height: 250px;"></div>
+    <div style="height: 400px;"></div>
     <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
     <br>
     <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
@@ -297,38 +293,35 @@ h1, h2 {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // --- 1. NAV CLICK BOLDING & SMOOTH OFFSET SCROLL ---
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Remove active class from all
+            e.preventDefault(); // Stop the default browser jump
+
+            // Update Bold State
             navLinks.forEach(l => l.classList.remove('active'));
-            // Add active class to clicked
             this.classList.add('active');
 
-            // Handle the "loading too high" fix
+            // Scroll with custom Offset
             const targetId = this.getAttribute('href');
-            if (targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // This calculates the position and accounts for the 16vh padding
-                    const offset = window.innerHeight * 0.14; 
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // This 0.16 multiplier matches your 16vh padding-top
+                const offset = window.innerHeight * 0.16; 
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         });
     });
 
-    // --- 2. GALLERY POPUP ---
+    // Gallery Logic
     const popup = document.querySelector('#columnPopup');
     const mediaContainer = document.querySelector('#mediaContainer');
     const prevBtn = document.querySelector('#prevBtn');
@@ -360,11 +353,9 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
     popup.addEventListener('click', () => { popup.style.display = 'none'; });
 
-    // --- 3. DISABLE RIGHT CLICK ---
     document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
-// --- 4. LIGHTBOX ---
 function openLightbox(el) {
     const lb = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-image');

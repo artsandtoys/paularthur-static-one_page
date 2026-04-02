@@ -8,6 +8,11 @@
     <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
 <style>
+/* Ensure smooth scrolling behavior for the whole document */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #000;
     color: #fff;
@@ -72,23 +77,22 @@ h1, h2 {
     margin: 10px 0;
     padding: 5px 0px;
     transition: color 0.3s;
+    font-weight: normal; 
 }
 
 .left-content nav a:hover {
     color: #b3ff00;
 }
 
-/* ACTIVE STATE - BOLDS THE LINK */
 .left-content nav a.active {
-    color: #b3ff00;
-    font-weight: bold;
+    color: #b3ff00 !important;
+    font-weight: bold !important;
 }
 
 /* RIGHT COLUMN */
 .right-column-wrapper {
     flex-basis: 66.66%;
     flex-grow: 1;
-    overflow-y: auto;
     margin-top: 0.5vh;
     padding-top: 16vh;
     padding-left: 20px;
@@ -108,6 +112,8 @@ h1, h2 {
 
 .content-section {
     padding: 32px 0;
+    /* Added scroll-margin-top to prevent "loading too high" */
+    scroll-margin-top: 15vh; 
 }
 
 /* TIMELINE */
@@ -133,12 +139,6 @@ h1, h2 {
     padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
-    transition: color 0.3s ease;
-}
-
-.timeline-item-link:hover {
-    color: #22cc33;
-    cursor: pointer;
 }
 
 .timeline-item-link::before {
@@ -160,111 +160,50 @@ h1, h2 {
 /* POPUP GALLERY */
 #columnPopup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  justify-content: center;
-  align-items: center;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none; justify-content: center; align-items: center;
   z-index: 2000;
-  cursor: pointer;
 }
 
 #mediaContainer {
-    max-width: 90%;
-    max-height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 85%; max-height: 85%;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2.5em;
-  cursor: pointer;
-  padding: 20px;
-  user-select: none;
-  z-index: 10000;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #fff; font-size: 2.5em;
+  cursor: pointer; padding: 20px; z-index: 10000;
 }
 
 #prevBtn { left: 30px; }
 #nextBtn { right: 30px; }
 
-.gallery-btn:hover { color: #b3ff00; }
-
-/* GRID CONTAINER */
+/* GRID */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
-    margin: 0 0 0 auto;
-    width: 90vw;
-    max-width: 800px; 
+    gap: 10px; max-width: 800px; 
 }
 
 .grid-container img {
-    width: 100%; 
-    cursor: pointer;
-    display: block;
-    object-fit: cover;
+    width: 100%; cursor: pointer; object-fit: cover;
 }
 
-/* LIGHTBOX */
 .lightbox {
-    position: fixed; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    display: none; 
-    justify-content: center; 
-    align-items: center; 
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
+    display: none; justify-content: center; align-items: center; 
+    z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
 }
 
-.lightbox-content {
-    display: block;
-    max-width: 80%; 
-    object-fit: contain;
-}
-
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media (max-width: 800px) {
-    .main-container {
-        width: 84%;
-        flex-direction: column;
-        margin: 0px 4px;
-    }
-
-    .left-column {
-        position: static;
-        width: 100%;
-        padding-right: 0;
-        height: auto;
-    }
-
-    .left-content {
-        width: 100%;
-        margin-top: 0;
-    }
-
-    .left-content nav a {
-        display: inline-block;
-        margin-right: 15px;
-    }
-
-    .grid-container {
-        grid-template-columns: 1fr; 
-        max-width: 99%;
-    }
+    .main-container { width: 90%; flex-direction: column; }
+    .left-column { position: static; width: 100%; height: auto; }
+    .left-content nav a { display: inline-block; margin-right: 15px; }
+    .grid-container { grid-template-columns: 1fr; }
+    .content-section { scroll-margin-top: 20px; }
 }
 </style>
 </head>
@@ -278,13 +217,10 @@ h1, h2 {
         <h1>Paul Arthur</h1>
         <br>
         <h2>Creative Technologist</h2>
+        <div class="description-text">Audio / Visual Artist and Storyteller</div>
 
-        <div class="description-text">
-            Audio / Visual Artist and Storyteller
-        </div>
-
-        <nav>
-            <a href="#about-me" class="nav-link active">about &ensp;</a>
+        <nav id="navbar">
+            <a href="#about-me" class="nav-link">about &ensp;</a>
             <a href="#projects" class="nav-link">works &ensp;</a>
             <a href="#visuals" class="nav-link">visual &ensp;</a>
         </nav>
@@ -305,105 +241,109 @@ h1, h2 {
     <section id="projects" class="content-section">
       <h2>works</h2>
         <br> 
-
         <div class="timeline">
-        <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date"><i>2023 - </i></div>
-            <div class="timeline-title">Meta Start</div>
-            <p>Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
-        </a>
+            <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date"><i>2023 - </i></div>
+                <div class="timeline-title">Meta Start</div>
+                <p>Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
+            </a>
 
-        <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2021</div>
-            <div class="timeline-title">Endless Bloom EP</div>
-            <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label distributor sign and release it.</p>
-        </a>
+            <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-title">Endless Bloom EP</div>
+                <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label distributor sign and release it.</p>
+            </a>
 
-        <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
-            <div class="timeline-date">2020 - 2021</div>
-            <div class="timeline-title">Oculus Launch Pad</div>
-            <p>1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad. Click here to see an excerpt from my experience, "Cyberspace Station - Orbital Observatory".</p>
-        </a>
-            
-        <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-            <div class="timeline-date">2020 - </div>
-            <div class="timeline-title">Cyberspace Station mini-game series</div>
-            <p>A new beginning, new frontier, and new roles to play...</p>
-        </a>
-
-        <div id="columnPopup">
-            <button id="prevBtn" class="gallery-btn">&#10094;</button>
-            <div id="mediaContainer"></div>
-            <button id="nextBtn" class="gallery-btn">&#10095;</button>
-          </div>      
-      </div>
+            <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
+                <div class="timeline-date">2020 - 2021</div>
+                <div class="timeline-title">Oculus Launch Pad</div>
+                <p>1/100 Up-and-coming VR devs & creators invited to participate in the 2020 class of Oculus Launch Pad.</p>
+            </a>
+                
+            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2020 - </div>
+                <div class="timeline-title">Cyberspace Station mini-game series</div>
+                <p>A new beginning, new frontier, and new roles to play...</p>
+            </a>
+        </div>
     </section>
         
     <section id="visuals" class="content-section" >
-    <br><br>
         <h2>snaps</h2>
-            <br>
-            <div class="grid-container">
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur dance music" onclick="openLightbox(this)"> 
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur house music" onclick="openLightbox(this)"> 
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" alt="dj paul arthur house music" onclick="openLightbox(this)"> 
-                
-              <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-                <img id="lightbox-image" class="lightbox-content" src="">
-              </div>
-            </div> 
+        <br>
+        <div class="grid-container">
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+        </div> 
     </section>
 
-      <div style="height: 80px;"></div>
-      <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
-      <br><br>
-      <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
+    <div style="height: 250px;"></div>
+    <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
+    <br>
+    <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
   </div>
+</div>
+
+<div id="columnPopup">
+  <button id="prevBtn" class="gallery-btn">&#10094;</button>
+  <div id="mediaContainer"></div>
+  <button id="nextBtn" class="gallery-btn">&#10095;</button>
+</div>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-image" style="max-width:90%;" src="">
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. NAV LINK BOLDING ---
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
+    // --- 1. NAV CLICK BOLDING & SMOOTH OFFSET SCROLL ---
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Remove active class from everyone
+        link.addEventListener('click', function(e) {
+            // Remove active class from all
             navLinks.forEach(l => l.classList.remove('active'));
-            // Add active class to the clicked one
+            // Add active class to clicked
             this.classList.add('active');
+
+            // Handle the "loading too high" fix
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // This calculates the position and accounts for the 16vh padding
+                    const offset = window.innerHeight * 0.14; 
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }
         });
     });
 
-    // --- 2. GALLERY POPUP LOGIC ---
+    // --- 2. GALLERY POPUP ---
     const popup = document.querySelector('#columnPopup');
     const mediaContainer = document.querySelector('#mediaContainer');
     const prevBtn = document.querySelector('#prevBtn');
     const nextBtn = document.querySelector('#nextBtn');
-    
     let currentGallery = [];
     let currentIndex = 0;
 
     function showMedia(index) {
         mediaContainer.innerHTML = '';
         const src = currentGallery[index];
-        if (!src) return;
-
-        const isVideo = src.match(/\.(mp4|webm)$/i);
-        if (isVideo) {
-            const video = document.createElement('video');
-            video.src = src;
-            video.controls = true;
-            video.autoplay = true;
-            video.style.maxWidth = '100%';
-            mediaContainer.appendChild(video);
-        } else {
-            const img = document.createElement('img');
-            img.src = src;
-            img.style.maxWidth = '100%';
-            mediaContainer.appendChild(img);
-        }
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '80vh';
+        mediaContainer.appendChild(img);
         currentIndex = index;
     }
 
@@ -411,47 +351,27 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
             currentGallery = trigger.dataset.images.split(',').map(s => s.trim());
-            currentIndex = 0;
-            showMedia(currentIndex);
+            showMedia(0);
             popup.style.display = 'flex';
         });
     });
 
-    nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % currentGallery.length;
-        showMedia(currentIndex);
-    });
-
-    prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-        showMedia(currentIndex);
-    });
-
-    popup.addEventListener('click', () => {
-        popup.style.display = 'none';
-        mediaContainer.innerHTML = '';
-    });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showMedia(currentIndex); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
+    popup.addEventListener('click', () => { popup.style.display = 'none'; });
 
     // --- 3. DISABLE RIGHT CLICK ---
     document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
-// --- 4. LIGHTBOX FOR SNAPS ---
-function openLightbox(element) {
+// --- 4. LIGHTBOX ---
+function openLightbox(el) {
     const lb = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-image');
-    img.src = element.getAttribute('data-full-src');
+    img.src = el.getAttribute('data-full-src');
     lb.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
 }
-
-function closeLightbox() {
-    const lb = document.getElementById('lightbox');
-    lb.style.display = 'none';
-    document.body.style.overflow = '';
-}
+function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 </script>
     
 </body>

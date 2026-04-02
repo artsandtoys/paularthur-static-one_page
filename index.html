@@ -8,7 +8,7 @@
     <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
 <style>
-/* Smooth scrolling for the whole page */
+/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
@@ -63,13 +63,12 @@ h1, h2 {
 .description-text {
     color: #ddd;
     font-size: 16px;
-    font-weight: normal;
     line-height: 1.5;
     margin-top: 16px;
     margin-bottom: 16px;
 }
 
-/* LEFT NAV LINKS */
+/* NAV LINKS */
 .left-content nav a {
     color: #fff;
     text-decoration: none;
@@ -94,7 +93,7 @@ h1, h2 {
     flex-basis: 66.66%;
     flex-grow: 1;
     margin-top: 0.5vh;
-    padding-top: 16vh; /* Original landing spot for 'About' */
+    padding-top: 16vh;
     padding-left: 20px;
     box-sizing: border-box;
     position: relative;
@@ -112,11 +111,10 @@ h1, h2 {
 
 .content-section {
     padding: 32px 0;
-    /* This tells the browser to stop 18% from the top of the screen */
     scroll-margin-top: 18vh; 
 }
 
-/* TIMELINE */
+/* TIMELINE HIGHLIGHT LOGIC */
 .timeline {
     position: relative;
     padding: 20px 0 2px 30px;
@@ -139,6 +137,13 @@ h1, h2 {
     padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
+    transition: all 0.3s ease; /* Smooth transition for the highlight */
+}
+
+/* The Highlight Effect on Hover */
+.timeline-item-link:hover {
+    background-color: rgba(179, 255, 0, 0.05); /* Subtle green glow behind text */
+    color: #b3ff00; /* Change text color to lime */
 }
 
 .timeline-item-link::before {
@@ -151,6 +156,13 @@ h1, h2 {
     background: #b3ff00;
     border-radius: 50%;
     z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Make the dot grow/glow when parent is hovered */
+.timeline-item-link:hover::before {
+    transform: scale(1.5);
+    box-shadow: 0 0 8px #b3ff00;
 }
 
 /* POPUP GALLERY */
@@ -199,7 +211,6 @@ h1, h2 {
     .left-column { position: static; width: 100%; height: auto; }
     .left-content nav a { display: inline-block; margin-right: 15px; }
     .grid-container { grid-template-columns: 1fr; }
-    .content-section { scroll-margin-top: 20px; }
 }
 </style>
 </head>
@@ -253,7 +264,7 @@ h1, h2 {
             <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
                 <div class="timeline-date">2020 - 2021</div>
                 <div class="timeline-title">Oculus Launch Pad</div>
-                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad.</p>
+                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad. Click here to see gallery.</p>
             </a>
                 
             <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
@@ -274,7 +285,7 @@ h1, h2 {
         </div> 
     </section>
 
-    <div style="height: 200px;"></div>
+    <div style="height: 400px;"></div>
     <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
     <br>
     <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
@@ -297,18 +308,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault(); // Stop the default browser jump
-
-            // Update Bold State
+            e.preventDefault(); 
             navLinks.forEach(l => l.classList.remove('active'));
             this.classList.add('active');
 
-            // Scroll with custom Offset
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // This 0.16 multiplier matches your 16vh padding-top
+                // Fixed Offset Calculation
                 const offset = window.innerHeight * 0.16; 
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - offset;
@@ -321,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gallery Logic
+    // Gallery logic
     const popup = document.querySelector('#columnPopup');
     const mediaContainer = document.querySelector('#mediaContainer');
     const prevBtn = document.querySelector('#prevBtn');

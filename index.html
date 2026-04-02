@@ -114,7 +114,7 @@ h1, h2 {
     scroll-margin-top: 18vh; 
 }
 
-/* TIMELINE HIGHLIGHT LOGIC */
+/* TIMELINE */
 .timeline {
     position: relative;
     padding: 20px 0 2px 30px;
@@ -137,13 +137,12 @@ h1, h2 {
     padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
-    transition: all 0.3s ease; /* Smooth transition for the highlight */
+    transition: color 0.3s ease; /* Transition text color only */
 }
 
-/* The Highlight Effect on Hover */
+/* Hover Effect: Text only (No shadow box) */
 .timeline-item-link:hover {
-    background-color: rgba(179, 255, 0, 0.05); /* Subtle green glow behind text */
-    color: #b3ff00; /* Change text color to lime */
+    color: #b3ff00; 
 }
 
 .timeline-item-link::before {
@@ -159,10 +158,10 @@ h1, h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Make the dot grow/glow when parent is hovered */
+/* Dot Glimmer effect on hover */
 .timeline-item-link:hover::before {
-    transform: scale(1.5);
-    box-shadow: 0 0 8px #b3ff00;
+    transform: scale(1.4);
+    box-shadow: 0 0 10px #b3ff00;
 }
 
 /* POPUP GALLERY */
@@ -264,7 +263,7 @@ h1, h2 {
             <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
                 <div class="timeline-date">2020 - 2021</div>
                 <div class="timeline-title">Oculus Launch Pad</div>
-                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad. Click here to see gallery.</p>
+                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad.</p>
             </a>
                 
             <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Fixed Offset Calculation
+                // Calculation to match your padding-top exactly
                 const offset = window.innerHeight * 0.16; 
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - offset;
@@ -329,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gallery logic
+    // Pop-up Gallery 
     const popup = document.querySelector('#columnPopup');
     const mediaContainer = document.querySelector('#mediaContainer');
     const prevBtn = document.querySelector('#prevBtn');

@@ -427,151 +427,136 @@ h1, h2 {
         
  // -- NAV ACTIVE LINKS --
  document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('.left-content nav a');
+    const target = document.getElementById('content-target');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const popup = document.getElementById('columnPopup');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-  function removeActiveClasses() {
-    navLinks.forEach(link => link.classList.remove('active'));
-  }
+    let currentGallery = [];
+    let currentIndex = 0;
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      removeActiveClasses();
-      this.classList.add('active');
-    });
-  });
+    /**
+     * 1. DYNAMIC CONTENT LOADER
+     * Fetches HTML files and injects them into the right column.
+     */
+    async function loadContent(file) {
+        try {
+            const response = await fetch(file);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const html = await response.text();
+            
+            target.innerHTML = html;
+            window.scrollTo(0, 0); 
 
-  const currentHash = window.location.hash;
-  let initialLinkFound = false;
-  if (currentHash) {
+            // CRITICAL: Re-scan the new HTML for gallery triggers
+            attachGalleryEvents();
+        } catch (err) {
+            console.error("Failed to load content:", err);
+            target.innerHTML = `<p>Error loading content. Please check if ${file} exists.</p>`;
+        }
+    }
+
+    /**
+     * 2. NAVIGATION HANDLER
+     */
     navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentHash) {
-        link.classList.add('active');
-        initialLinkFound = true;
-      }
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const file = link.getAttribute('data-content-file');
+            if (!file) return;
+
+            // UI Feedback
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            loadContent(file);
+        });
     });
-  }
-    
-  if (!initialLinkFound && navLinks.length > 0) navLinks[0].classList.add('active');
-                          
-  // -- GALLERY POPUP --
-  const popup = document.getElementById('columnPopup');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  let currentGallery = [];
-  let currentIndex = 0;
 
-  document.querySelectorAll('.gallery-trigger').forEach(item => {
-    item.addEventListener('click', e => {
-      e.preventDefault();
-      currentGallery = item.dataset.images.split(',').map(x => x.trim()).filter(x => x.length);
-      currentIndex = 0;
-      showMedia(currentIndex);
-      popup.style.display = 'flex';
-    });
-  });
-
-  function clearMedia() {
-    // remove any existing img/video elements inside popup
-    popup.querySelectorAll('img, video').forEach(el => {
-      // if video, pause first
-      if (el.tagName && el.tagName.toLowerCase() === 'video') {
-        try { el.pause(); } catch (err) {}
-        el.removeAttribute('src');
-      }
-      el.remove();
-    });
-  }
-
-  // NEW UPDATED ADDED VIDEO
-  function showMedia(index) {
-    clearMedia();
-    const src = currentGallery[index];
-    if (!src) return;
-
-    const isVideo = src.match(/\.(mp4|webm)(\?.*)?$/i);
-
-    if (isVideo) {
-      const video = document.createElement('video');
-      video.src = src;
-      video.controls = true;
-      video.autoplay = true;
-      video.muted = true;
-      video.loop = true; 
-      video.playsInline = true;
-      video.style.maxWidth = '100%';
-      video.style.maxHeight = '100%';
-      video.setAttribute('aria-label', 'Gallery video');
-      // Insert before nextBtn so prev/next remain visible
-      popup.insertBefore(video, nextBtn);
-
-      // handle playback errors in console for debugging
-      video.addEventListener('error', (ev) => console.warn('Video error', ev));
-      // ensure it attempts to play (catch promise rejection)
-      video.play().catch(err => {
-        // most likely autoplay blocked if not muted; we set muted true above
-        console.warn('Play promise rejected:', err);
-      });
-    } else {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = 'Gallery image';
-      img.style.maxWidth = '100%';
-      img.style.maxHeight = '100%';
-      popup.insertBefore(img, nextBtn);
+    /**
+     * 3. GALLERY EVENT BINDING
+     * Scans the page for any element with the 'gallery-trigger' class.
+     */
+    function attachGalleryEvents() {
+        const triggers = document.querySelectorAll('.gallery-trigger');
+        
+        triggers.forEach(trigger => {
+            // Remove old listener if exists to prevent double-firing
+            trigger.onclick = (e) => {
+                e.preventDefault();
+                
+                // Get images from data-images (comma separated) or fallback to src
+                const data = trigger.dataset.images || trigger.getAttribute('src');
+                currentGallery = data.split(',').map(s => s.trim());
+                currentIndex = 0;
+                
+                openPopup();
+            };
+        });
     }
-  }
 
-  // NEXT
-  nextBtn.addEventListener('click', e => {
-    e.stopPropagation();
-    if (!currentGallery.length) return;
-    currentIndex = (currentIndex + 1) % currentGallery.length;
-    showMedia(currentIndex);
-  });
-
-  // PREV     
-  prevBtn.addEventListener('click', e => {
-    e.stopPropagation();
-    if (!currentGallery.length) return;
-    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-    showMedia(currentIndex);
-  });
-
-  // CLOSE
-  //popup.addEventListener('click', e => {
-  //  if (e.target === popup || e.target === popupImage) popup.style.display = 'none';
-  //});
-
-  // CLOSE
-  popup.addEventListener('click', e => {
-  // close if click is outside media or on the popup background
-  if (e.target === popup || e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
-    popup.style.display = 'none';
-    // pause video if it exists
-    const vid = popup.querySelector('video');
-    if (vid) vid.pause();
+    /**
+     * 4. POPUP & MEDIA RENDERING
+     */
+    function openPopup() {
+        renderMedia();
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
     }
-  });
 
-  // KEYBOARD
-  document.addEventListener('keydown', e => {
-    if (popup.style.display === 'flex') {
-      if (e.key === 'Escape') {
-        popup.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (err) {} });
-        popup.style.display = 'none';
-        clearMedia();
-      }
-      if (e.key === 'ArrowRight') nextBtn.click();
-      if (e.key === 'ArrowLeft') prevBtn.click();
+    function renderMedia() {
+        // Clear existing img or video tags inside the popup
+        popup.querySelectorAll('img, video').forEach(m => m.remove());
+        
+        const src = currentGallery[currentIndex];
+        const isVideo = src.match(/\.(mp4|webm|mov)/i);
+        
+        // Create the correct element type
+        const mediaElement = isVideo ? document.createElement('video') : document.createElement('img');
+        
+        mediaElement.src = src;
+        mediaElement.className = 'popup-media';
+        
+        if (isVideo) {
+            mediaElement.controls = true;
+            mediaElement.autoplay = true;
+            mediaElement.muted = true; 
+            mediaElement.loop = true;
+            mediaElement.playsInline = true;
+        }
+        
+        // Insert before the Next button to keep buttons on top
+        popup.insertBefore(mediaElement, nextBtn);
     }
-  });
- });
 
-  // -- Disable right-click on the entire page -- 
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    alert("Right-click is disabled on this page.");
-  });
+    // GALLERY NAVIGATION
+    nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        renderMedia();
+    };
+
+    prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        renderMedia();
+    };
+
+    // CLOSE ACTIONS
+    popup.onclick = (e) => {
+        if (e.target === popup || e.target.classList.contains('popup-media')) {
+            popup.style.display = 'none';
+            document.body.style.overflow = ''; 
+            // Stop any playing video
+            const vid = popup.querySelector('video');
+            if (vid) vid.pause();
+        }
+    };
+
+    // INITIALIZE
+    attachGalleryEvents();
+});
 </script>
 
 </body>

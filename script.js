@@ -1,5 +1,3 @@
-<style>
-    
 body {
     background-color: #000;
     color: #fff;
@@ -308,4 +306,3 @@ h1, h2 {
         max-width: 99%; /* Give it 5% margin space on small screens */
     }
     
-</style>

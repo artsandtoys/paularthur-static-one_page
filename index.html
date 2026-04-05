@@ -137,16 +137,6 @@ h1, h2 {
     text-decoration: none;
     color: #fff;
 }
-
-/* Only highlight the Title and Dot, not the Date
-.timeline-title {
-    transition: color 0.3s ease;
-} 
-
-.timeline-item-link:hover .timeline-title {
-    color: #b3ff00; 
-}
- */
     
 .timeline-item-link::before {
     content: '';
@@ -200,13 +190,13 @@ h1, h2 {
     gap: 10px; max-width: 800px; 
 }
 
-.grid-container img {
-    width: 100%; cursor: pointer; object-fit: cover;
+.grid-container img, .grid-container video {
+    width: 100%; cursor: pointer; object-fit: cover; aspect-ratio: 1/1;
 }
 
 .lightbox {
     position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
-    display: none; justify-content: center; align-items: center; 
+    display: none; flex-direction: column; justify-content: center; align-items: center; 
     z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
 }
 
@@ -285,18 +275,17 @@ h1, h2 {
         <br>
         <div class="grid-container">
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
-    <video src="images/Circle_Lights-2025-0001-0240.mp4" 
-       data-full-src="images/Circle_Lights-2025-0001-0240.mp4" 
-       autoplay muted loop playsinline 
-       style="width: 100%; cursor: pointer; object-fit: cover;" 
-       onclick="openLightbox(this)">
-    </video>            
-            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
-
-            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            
+            <video src="images/Circle_Lights-2025-0001-0240.mp4" 
+               data-full-src="images/Circle_Lights-2025-0001-0240.mp4" 
+               autoplay muted loop playsinline 
+               onclick="openLightbox(this)">
+            </video>            
+            
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
-
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
@@ -310,14 +299,15 @@ h1, h2 {
   </div>
 </div>
 
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-image" style="max-width:90%; display:none;" src="">
+    <video id="lightbox-video" style="max-width:90%; display:none;" controls autoplay loop></video>
+</div>
+
 <div id="columnPopup">
   <button id="prevBtn" class="gallery-btn">&#10094;</button>
   <div id="mediaContainer"></div>
   <button id="nextBtn" class="gallery-btn">&#10095;</button>
-</div>
-
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-image" style="max-width:90%;" src="">
 </div>
 
 <script>
@@ -380,13 +370,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
+// UPDATED LIGHTBOX LOGIC
 function openLightbox(el) {
     const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-image');
-    img.src = el.getAttribute('data-full-src');
+    const lbImg = document.getElementById('lightbox-image');
+    const lbVideo = document.getElementById('lightbox-video');
+    const src = el.getAttribute('data-full-src');
+
+    // Reset visibility and video state
+    lbImg.style.display = 'none';
+    lbVideo.style.display = 'none';
+    lbVideo.pause();
+
+    if (el.tagName === 'VIDEO') {
+        lbVideo.src = src;
+        lbVideo.style.display = 'block';
+        lbVideo.play();
+    } else {
+        lbImg.src = src;
+        lbImg.style.display = 'block';
+    }
+
     lb.style.display = 'flex';
 }
-function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+
+function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    const lbVideo = document.getElementById('lightbox-video');
+    
+    lb.style.display = 'none';
+    lbVideo.pause(); // Prevent audio from playing after closing
+    lbVideo.src = ""; // Clean up source
+}
 </script>
     
 </body>

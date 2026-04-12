@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>hi i'm paul</title>
     <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
@@ -23,6 +24,11 @@ body {
     box-sizing: border-box;
 }
 
+h1, h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /* MAIN CONTAINER */
 .main-container {
     width: 75%;
@@ -30,6 +36,7 @@ body {
     margin: 0 auto;
     display: flex;
     flex-grow: 1;
+    padding-bottom: 50px;
     align-items: flex-start;
 }
 
@@ -39,15 +46,16 @@ body {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     position: sticky;
     top: 0;
-    height: 100vh; /* Full viewport height for sticky logic */
+    height: 90vh;
     padding-right: 20px;
     box-sizing: border-box;
 }
 
 .left-content {
-    width: 85%;
+    width: 75%;
     margin-top: 14vh;
 }
 
@@ -60,46 +68,52 @@ body {
 }
 
 /* NAV LINKS */
-nav a {
+.left-content nav a {
     color: #fff;
     text-decoration: none;
     display: block;
     margin: 10px 0;
-    padding: 5px 0;
+    padding: 5px 0px;
     transition: color 0.3s;
+    font-weight: normal; 
 }
 
-nav a:hover, nav a.active {
+.left-content nav a:hover {
     color: #b3ff00;
 }
 
-nav a.active {
-    font-weight: bold;
+.left-content nav a.active {
+    color: #b3ff00 !important;
+    font-weight: bold !important;
 }
 
 /* RIGHT COLUMN */
 .right-column-wrapper {
     flex-basis: 66.66%;
     flex-grow: 1;
-    padding-top: 14vh;
+    margin-top: 0.5vh;
+    padding-top: 16vh;
     padding-left: 20px;
     box-sizing: border-box;
+    position: relative;
 }
 
-.content-section {
-    padding-bottom: 60px;
-    scroll-margin-top: 16vh;
+.right-column-wrapper h2 {
+    margin: 0 0 8px 0;
 }
 
-h2 { margin-bottom: 12px; }
-
-p {
+#about-me p, .right-column-wrapper p {
     color: #ddd;
     line-height: 1.5;
     margin-bottom: 16px;
 }
 
-/* TIMELINE - Restored Layout */
+.content-section {
+    padding: 32px 0;
+    scroll-margin-top: 18vh; 
+}
+
+/* TIMELINE */
 .timeline {
     position: relative;
     padding: 20px 0 2px 30px;
@@ -108,7 +122,9 @@ p {
 .timeline::before {
     content: '';
     position: absolute;
-    left: 0; top: 0; bottom: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: 2px;
     background: #444;
 }
@@ -116,100 +132,90 @@ p {
 .timeline-item-link {
     position: relative;
     display: block;
-    margin-bottom: 40px;
-    padding-left: 10px;
+    margin-bottom: 30px;
+    padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
 }
 
-/* Bullet Point & Animation */
+/* Only highlight the Title and Dot, not the Date
+.timeline-title {
+    transition: color 0.3s ease;
+} 
+
+.timeline-item-link:hover .timeline-title {
+    color: #b3ff00; 
+}
+ */
+    
 .timeline-item-link::before {
     content: '';
     position: absolute;
-    left: -35px; /* Aligns with vertical line */
-    top: 6px;
-    width: 10px;
-    height: 10px;
+    left: -10px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
     background: #b3ff00;
     border-radius: 50%;
-    z-index: 2;
+    z-index: 1;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .timeline-item-link:hover::before {
-    transform: scale(1.5);
+    transform: scale(1.4);
     box-shadow: 0 0 10px #b3ff00;
 }
 
-.timeline-date { color: #888; font-size: 0.9em; margin-bottom: 4px; }
-.timeline-title { font-weight: bold; margin-bottom: 8px; font-size: 1.1em; }
+.timeline-date {
+    color: #ccc; 
+}
+
+/* POPUP GALLERY */
+#columnPopup {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none; justify-content: center; align-items: center;
+  z-index: 2000;
+}
+
+#mediaContainer {
+    max-width: 85%; max-height: 85%;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.gallery-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #fff; font-size: 2.5em;
+  cursor: pointer; padding: 20px; z-index: 10000;
+}
+
+#prevBtn { left: 30px; }
+#nextBtn { right: 30px; }
 
 /* GRID */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; max-width: 800px; 
 }
 
-.grid-container img, .grid-container video {
-    width: 100%;
-    cursor: pointer;
-    object-fit: cover;
-    aspect-ratio: 1/1;
+.grid-container img {
+    width: 100%; cursor: pointer; object-fit: cover;
 }
 
-/* MOBILE OVERRIDES - The "Dead Space" Fix */
-@media (max-width: 800px) {
-    body {
-        display: block;
-        height: auto;
-    }
-
-    .main-container {
-        width: 90%;
-        flex-direction: column;
-        display: block;
-    }
-
-    .left-column {
-        position: relative; /* Unsticks it */
-        height: auto;
-        width: 100%;
-        padding-right: 0;
-    }
-
-    .left-content {
-        margin-top: 40px;
-        width: 100%;
-    }
-
-    nav a {
-        display: inline-block;
-        margin-right: 15px;
-    }
-
-    .right-column-wrapper {
-        width: 100%;
-        padding-top: 20px; /* Collapses the huge top gap */
-        padding-left: 0;
-        display: block;
-    }
-
-    .content-section {
-        padding-bottom: 30px;
-        scroll-margin-top: 20px;
-    }
-
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* LIGHTBOX */
 .lightbox {
     position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
-    display: none; flex-direction: column; justify-content: center; align-items: center; 
+    display: none; justify-content: center; align-items: center; 
     z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+    .main-container { width: 90%; flex-direction: column; }
+    .left-column { position: static; width: 100%; height: auto; }
+    .left-content nav a { display: inline-block; margin-right: 15px; }
+    .grid-container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -217,128 +223,166 @@ p {
 <body>
 
 <div class="main-container">
+
     <div class="left-column">
-        <div class="left-content">
-            <a href="https://paularthur.xyz/" style="color: white; text-decoration: none;"><h1>Paul Arthur</h1></a>
-            <br>
-            <h2>Creative Technologist</h2>
-            <div class="description-text">Audio / Visual Artist and Storyteller</div>
+    <div class="left-content">
+         <a href="https://paularthur.xyz/" style="color: white; text-decoration: none;"><h1>Paul Arthur</h1></a>
+        <br>
+        <h2>Creative Technologist</h2>
+        <div class="description-text">Audio / Visual Artist and Storyteller</div>
 
-            <nav id="navbar">
-                <a href="#about-me" class="nav-link">about</a>
-                <a href="#projects" class="nav-link">works</a>
-                <a href="#visuals" class="nav-link">visual</a>
-            </nav>
+        <nav id="navbar">
+            <a href="#about-me" class="nav-link">about &ensp;</a>
+            <a href="#projects" class="nav-link">works &ensp;</a>
+            <a href="#visuals" class="nav-link">visual &ensp;</a>
+        </nav>
+    </div>
+    </div>
+
+  <div class="right-column-wrapper">
+
+    <section id="about-me" class="content-section">
+      <h2>about</h2>
+      <p> 
+        I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment. 
+        <br>
+        My passion is for designing immersive experiences and games by worldbuilding with micro stories.
+      </p> 
+    </section>
+
+    <section id="projects" class="content-section">
+      <h2>works</h2>
+        <br> 
+        <div class="timeline">
+            <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date"><i>2023 - </i></div>
+                <div class="timeline-title">Meta Start</div>
+                <p>Joined the Meta Horizon Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to Mixed Reality.</p>
+            </a>
+
+            <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-title">Endless Bloom EP</div>
+                <p>Crafted 3D visuals and electronic music signed by a label distributor.</p>
+            </a>
+
+            <a href="#" class="timeline-item-link gallery-trigger" data-images="images/level-cybersprint++bw.png, images/level-cybersprint++.png">
+                <div class="timeline-date">2020 - 2021</div>
+                <div class="timeline-title">Oculus Launch Pad</div>
+                <p>1/100 Up-and-coming VR devs invited to the 2020 class of Oculus Launch Pad.</p>
+            </a>
+                
+            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2020 - </div>
+                <div class="timeline-title">Cyberspace Station mini-game series</div>
+                <p>A new frontier and new roles to play...</p>
+            </a>
         </div>
-    </div>
+    </section>
+        
+    <section id="visuals" class="content-section" >
+        <h2>visuals</h2>
+        <br>
+        <div class="grid-container">
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
 
-    <div class="right-column-wrapper">
-        <section id="about-me" class="content-section">
-            <h2>about</h2>
-            <p>I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment. <br>
-            My passion is for designing immersive experiences and games by worldbuilding with micro stories.</p> 
-        </section>
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
 
-        <section id="projects" class="content-section">
-            <h2>works</h2>
-            <div class="timeline">
-                <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
-                    <div class="timeline-date">2024 - </div>
-                    <div class="timeline-title">Meta Start</div>
-                    <p>Joined the Meta Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to MR.</p>
-                </a>
-                
-                <a href="https://www.youtube.com/@PaulArthur" target="_blank" class="timeline-item-link">
-                    <div class="timeline-date">2022 - </div>
-                    <div class="timeline-title">Featured on...</div>
-                    <p>For dance music lovers who like the chilled melodic sound, my first single “Daylight” is featured on YoutubeMusic’s editorial playlist “<b>Chill EDM Hits</b>”.</p>
-                </a>
-                
-                <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
-                    <div class="timeline-date">2021</div>
-                    <div class="timeline-title">Endless Bloom EP</div>
-                    <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, and have a label partner sign and release it.</p>
-                </a>
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
+        </div> 
+    </section>
 
-                <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-                    <div class="timeline-date">2020 - 2021</div>
-                    <div class="timeline-title">Oculus Launch Pad</div>
-                    <p>1/100 up-and-coming VR devs invited to participate in the 2020 class of <b>Oculus Launch Pad.</b></p>
-                </a>
-            </div>
-        </section>
+    <div style="height: 100px;"></div>
+    <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
+    <br>
+    <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
+  </div>
+</div>
 
-        <section id="visuals" class="content-section">
-            <h2>visuals</h2>
-            <div class="grid-container">
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
-                <video src="images/Circle_Lights-2025-0001-0240.mp4" data-full-src="images/Circle_Lights-2025-0001-0240.mp4" muted loop playsinline onclick="openLightbox(this)"></video>              
-                <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
-                <img src="images/design/orb-biome-dunes-4k-2-.png" data-full-src="images/design/orb-biome-dunes-4k-2-.png" onclick="openLightbox(this)">   
-                <img src="images/design/orb-biome-grass-4k-2-.png" data-full-src="images/design/orb-biome-grass-4k-2-.png" onclick="openLightbox(this)"> 
-                <img src="images/design/orb-biome-tundra-3-4k-2-.png" data-full-src="images/design/orb-biome-tundra-3-4k-2-.png" onclick="openLightbox(this)"> 
-            </div> 
-        </section>
-
-        <div style="height: 40px;"></div>
-        <p><small><i>design by: artsandtoys</i></small></p>
-        <p><a href="#" style="color: #fff; text-decoration: none;"><b><i>Fin.</i></b></a></p>
-    </div>
+<div id="columnPopup">
+  <button id="prevBtn" class="gallery-btn">&#10094;</button>
+  <div id="mediaContainer"></div>
+  <button id="nextBtn" class="gallery-btn">&#10095;</button>
 </div>
 
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-image" style="max-width:90%; display:none;" src="">
-    <video id="lightbox-video" style="max-width:90%; display:none;" controls autoplay loop></video>
+  <img id="lightbox-image" style="max-width:90%;" src="">
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('.nav-link');
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault(); 
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    const offset = window.innerWidth <= 800 ? 20 : window.innerHeight * 0.16; 
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offset = window.innerHeight * 0.16; 
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                }
-            });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
         });
     });
 
-    function openLightbox(el) {
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-image');
-        const lbVideo = document.getElementById('lightbox-video');
-        const src = el.getAttribute('data-full-src');
-        lbImg.style.display = 'none';
-        lbVideo.style.display = 'none';
-        if (el.tagName === 'VIDEO') {
-            lbVideo.src = src;
-            lbVideo.style.display = 'block';
-            lbVideo.play();
-        } else {
-            lbImg.src = src;
-            lbImg.style.display = 'block';
-        }
-        lb.style.display = 'flex';
+    const popup = document.querySelector('#columnPopup');
+    const mediaContainer = document.querySelector('#mediaContainer');
+    const prevBtn = document.querySelector('#prevBtn');
+    const nextBtn = document.querySelector('#nextBtn');
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function showMedia(index) {
+        mediaContainer.innerHTML = '';
+        const src = currentGallery[index];
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '80vh';
+        mediaContainer.appendChild(img);
+        currentIndex = index;
     }
 
-    function closeLightbox() {
-        const lb = document.getElementById('lightbox');
-        const lbVideo = document.getElementById('lightbox-video');
-        lb.style.display = 'none';
-        lbVideo.pause();
-    }
+    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentGallery = trigger.dataset.images.split(',').map(s => s.trim());
+            showMedia(0);
+            popup.style.display = 'flex';
+        });
+    });
+
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showMedia(currentIndex); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
+    popup.addEventListener('click', () => { popup.style.display = 'none'; });
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+});
+
+function openLightbox(el) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-image');
+    img.src = el.getAttribute('data-full-src');
+    lb.style.display = 'flex';
+}
+function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 </script>
+    
 </body>
 </html>

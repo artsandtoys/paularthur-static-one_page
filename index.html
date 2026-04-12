@@ -250,6 +250,19 @@ h1, h2 {
         margin-top: 30px; /* Reduced from 14vh */
     }
 
+    #navbar {
+        display: flex;         /* Lays links out in a line */
+        flex-direction: row;   /* Forces horizontal direction */
+        flex-wrap: wrap;       /* Allows links to wrap if screen is very narrow */
+        gap: 20px;             /* Adds even spacing between links */
+        margin-top: 10px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 0 !important;
+    }
+
     .right-column-wrapper {
         padding-top: 20px; /* This is the main fix for the "Dead Space" */
         padding-left: 0;
@@ -265,11 +278,6 @@ h1, h2 {
     /* 4. Collapse the grid to a single column */
     .grid-container {
         grid-template-columns: 1fr;
-    }
-
-    /* 5. Adjust navigation for mobile flow */
-    nav a {
-        display: inline-block;
     }
 }
 </style>

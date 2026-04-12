@@ -1,184 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>hi i'm paul</title>
-    <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
+    <title>hi i'm paul</title>
+    <link rel="icon" href="images/tinyguru3-10px_small.png" type="image/png">
 
 <style>
-    
+    
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    box-sizing: border-box;
+    background-color: #000;
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h1, h2 {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* MAIN CONTAINER */
 .main-container {
-    width: 75%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-grow: 1;
-    padding-bottom: 50px;
-    align-items: flex-start;
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 50px;
+    align-items: flex-start;
 }
 
 /* LEFT COLUMN */
 .left-column {
-    flex-basis: 33.33%;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: sticky;
-    top: 0;
-    height: 90vh;
-    padding-right: 20px;
-    box-sizing: border-box;
+    flex-basis: 33.33%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    height: 90vh;
+    padding-right: 20px;
+    box-sizing: border-box;
 }
 
 .left-content {
-    width: 75%;
-    margin-top: 14vh;
+    width: 75%;
+    margin-top: 14vh;
 }
 
 .description-text {
-    color: #ddd;
-    font-size: 16px;
-    line-height: 1.5;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    color: #ddd;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 /* NAV LINKS */
 .left-content nav a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    margin: 10px 0;
-    padding: 5px 0px;
-    transition: color 0.3s;
-    font-weight: normal; 
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    padding: 5px 0px;
+    transition: color 0.3s;
+    font-weight: normal; 
 }
 
 .left-content nav a:hover {
-    color: #b3ff00;
+    color: #b3ff00;
 }
 
 .left-content nav a.active {
-    color: #b3ff00 !important;
-    font-weight: bold !important;
+    color: #b3ff00 !important;
+    font-weight: bold !important;
 }
 
 /* RIGHT COLUMN */
 .right-column-wrapper {
-    flex-basis: 66.66%;
-    flex-grow: 1;
-    margin-top: 0.5vh;
-    padding-top: 16vh;
-    padding-left: 20px;
-    box-sizing: border-box;
-    position: relative;
+    flex-basis: 66.66%;
+    flex-grow: 1;
+    margin-top: 0.5vh;
+    padding-top: 16vh;
+    padding-left: 20px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .right-column-wrapper h2 {
-    margin: 0 0 8px 0;
+    margin: 0 0 8px 0;
 }
 
 #about-me p, .right-column-wrapper p {
-    color: #ddd;
-    line-height: 1.5;
-    margin-bottom: 16px;
+    color: #ddd;
+    line-height: 1.5;
+    margin-bottom: 16px;
 }
 
 .content-section {
-    padding: 32px 0;
-    scroll-margin-top: 18vh; 
+    padding: 32px 0;
+    scroll-margin-top: 18vh; 
 }
 
 /* TIMELINE */
 .timeline {
-    position: relative;
-    padding: 20px 0 2px 30px;
+    position: relative;
+    padding: 20px 0 2px 30px;
 }
 
 .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #444;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #444;
 }
 
 .timeline-item-link {
-    position: relative;
-    display: block;
-    margin-bottom: 30px;
-    padding: 0 0 0 20px;
-    text-decoration: none;
-    color: #fff;
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+    padding: 0 0 0 20px;
+    text-decoration: none;
+    color: #fff;
 }
-    
+    
 .timeline-item-link::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 5px;
-    width: 8px;
-    height: 8px;
-    background: #b3ff00;
-    border-radius: 50%;
-    z-index: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    background: #b3ff00;
+    border-radius: 50%;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .timeline-item-link:hover::before {
-    transform: scale(1.4);
-    box-shadow: 0 0 10px #b3ff00;
+    transform: scale(1.4);
+    box-shadow: 0 0 10px #b3ff00;
 }
 
 .timeline-date {
-    color: #ccc; 
+    color: #ccc; 
 }
 
 /* POPUP GALLERY */
 #columnPopup {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85);
-  display: none; justify-content: center; align-items: center;
-  z-index: 2000;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none; justify-content: center; align-items: center;
+  z-index: 2000;
 }
 
 #mediaContainer {
-    max-width: 85%; max-height: 85%;
-    display: flex; justify-content: center; align-items: center;
+    max-width: 85%; max-height: 85%;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .gallery-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: none; border: none; color: #fff; font-size: 2.5em;
-  cursor: pointer; padding: 20px; z-index: 10000;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #fff; font-size: 2.5em;
+  cursor: pointer; padding: 20px; z-index: 10000;
 }
 
 #prevBtn { left: 30px; }
@@ -186,68 +186,30 @@ h1, h2 {
 
 /* GRID */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; max-width: 800px; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; max-width: 800px; 
 }
 
 .grid-container img, .grid-container video {
-    width: 100%; cursor: pointer; object-fit: cover; /* aspect-ratio: 1/1; */
+    width: 100%; cursor: pointer; object-fit: cover; /* aspect-ratio: 1/1; */
 }
 
 .lightbox {
-    position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
-    display: none; flex-direction: column; justify-content: center; align-items: center; 
-    z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
+    position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
+    display: none; flex-direction: column; justify-content: center; align-items: center; 
+    z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* MOBILE OPTIMIZATIONS */
+/* MOBILE */
 @media (max-width: 800px) {
-    .main-container { 
-        width: 92%; 
-        flex-direction: column; 
-    }
-
-    .left-column { 
-        position: static; 
-        width: 100%; 
-        height: auto; /* Changed from 15px to allow content to fit */
-        padding-right: 0;
-    }
-
-    .left-content {
-        width: 100%;
-        margin-top: 40px; /* Reduced from 14vh */
-        text-align: left;
-    }
-
-    .right-column-wrapper {
-        width: 100%;
-        padding-top: 20px; /* Reduced from 16vh */
-        padding-left: 0;
-        margin-top: 0;
-    }
-
-    .content-section {
-        padding: 20px 0; /* Tightened section spacing */
-        scroll-margin-top: 20px; /* Adjusts where the page lands when clicking nav */
-    }
-
-    .left-content nav {
-        margin-top: 10px;
-        border-bottom: 1px solid #333;
-        padding-bottom: 10px;
-    }
-
-    .left-content nav a { 
-        display: inline-block; 
-        margin-right: 15px; 
-    }
-
-    .grid-container { 
-        grid-template-columns: 1fr; /* Stack images on mobile */
-        gap: 20px;
-    }
+    .main-container { width: 90%; flex-direction: column; }
+    
+    .left-column { position: static; width: 100%; height: 1px; }
+    
+    .left-content nav a { display: inline-block; margin-right: 15px; }
+    
+    .grid-container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -256,206 +218,206 @@ h1, h2 {
 
 <div class="main-container">
 
-    <div class="left-column">
-    <div class="left-content">
-         <a href="https://paularthur.xyz/" style="color: white; text-decoration: none;"><h1>Paul Arthur</h1></a>
-        <br>
-        <h2>Creative Technologist</h2>
-        <div class="description-text">Audio / Visual Artist and Storyteller</div>
+    <div class="left-column">
+    <div class="left-content">
+         <a href="https://paularthur.xyz/" style="color: white; text-decoration: none;"><h1>Paul Arthur</h1></a>
+        <br>
+        <h2>Creative Technologist</h2>
+        <div class="description-text">Audio / Visual Artist and Storyteller</div>
 
-        <nav id="navbar">
-            <a href="#about-me" class="nav-link">about &ensp;</a>
-            <a href="#projects" class="nav-link">works &ensp;</a>
-            <a href="#visuals" class="nav-link">visual &ensp;</a>
-        </nav>
-    </div>
-    </div>
+        <nav id="navbar">
+            <a href="#about-me" class="nav-link">about &ensp;</a>
+            <a href="#projects" class="nav-link">works &ensp;</a>
+            <a href="#visuals" class="nav-link">visual &ensp;</a>
+        </nav>
+    </div>
+    </div>
 
-  <div class="right-column-wrapper">
-      
+  <div class="right-column-wrapper">
+      
 <!-- LINK 1 ABOUT-->
-    <section id="about-me" class="content-section">
-      <h2>about</h2>
-      <p> I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment. <br>
-        My passion is for designing immersive experiences and games by worldbuilding with micro stories. </p> 
-    </section>
+    <section id="about-me" class="content-section">
+      <h2>about</h2>
+      <p> I am an Audio / Visual Artist working at the intersection of emerging technology and entertainment. <br>
+        My passion is for designing immersive experiences and games by worldbuilding with micro stories. </p> 
+    </section>
 
 <!-- LINK 2 WORK TIMELINE-->
-    <section id="projects" class="content-section">
-      <h2>works</h2>
-        <br> 
-        <div class="timeline">
-            <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
-                <div class="timeline-date">2024 - </div>
-                <div class="timeline-title">Meta Start</div>
-                <p>Joined the Meta Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to MR.</p>
-            </a>
-            
-            <a href="https://www.youtube.com/@PaulArthur" target="_blank" class="timeline-item-link">
-                        <div class="timeline-date">2022 - </div>
-                        <div class="timeline-title">Featured on...</div>
-                        <p style="color: #ddd;">For dance music lovers who like the chilled melodic sound, my first single “Daylight” is featured on YoutubeMusic’s editorial playlist “<B>Chill EDM Hits</B>”.</p>
-            </a>
-            
-            <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
-                <div class="timeline-date">2021</div>
-                <div class="timeline-title">Endless Bloom EP</div>
-                <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label partner sign and release it.</p>
-            </a>
+    <section id="projects" class="content-section">
+      <h2>works</h2>
+        <br> 
+        <div class="timeline">
+            <a href="https://weareofearth.xyz/cyberspacestation-orbitaljunker/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2024 - </div>
+                <div class="timeline-title">Meta Start</div>
+                <p>Joined the Meta Start program (fka as Oculus Start), to port my arcade game "Cyberspace Station - Orbital Junker" to MR.</p>
+            </a>
+            
+            <a href="https://www.youtube.com/@PaulArthur" target="_blank" class="timeline-item-link">
+                        <div class="timeline-date">2022 - </div>
+                        <div class="timeline-title">Featured on...</div>
+                        <p style="color: #ddd;">For dance music lovers who like the chilled melodic sound, my first single “Daylight” is featured on YoutubeMusic’s editorial playlist “<B>Chill EDM Hits</B>”.</p>
+            </a>
+            
+            <a href="https://hypeddit.com/xxe5zi" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-title">Endless Bloom EP</div>
+                <p>My goal with this project was to see if I could write and produce a chill dance music project, craft 3D visuals that matched the aesthetic, package it, pitch it, and have a label partner sign and release it.</p>
+            </a>
 
-            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-                <div class="timeline-date">2020 - 2021</div>
-                <div class="timeline-title">Oculus Launch Pad</div>
-                <p>1/100 up-and-coming VR devs invited to participate in the 2020 class of <B>Oculus Launch Pad.</B></p>
-            </a>
-                
-            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
-                <div class="timeline-date">2020 - </div>
-                <div class="timeline-title">Cyberspace Station mini-game series</div>
-                <p>A new frontier and new roles to play...</p>
-            </a>
-        </div>
-    </section>
+            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2020 - 2021</div>
+                <div class="timeline-title">Oculus Launch Pad</div>
+                <p>1/100 up-and-coming VR devs invited to participate in the 2020 class of <B>Oculus Launch Pad.</B></p>
+            </a>
+                
+            <a href="https://weareofearth.xyz/cyberspace-orb/" target="_blank" class="timeline-item-link">
+                <div class="timeline-date">2020 - </div>
+                <div class="timeline-title">Cyberspace Station mini-game series</div>
+                <p>A new frontier and new roles to play...</p>
+            </a>
+        </div>
+    </section>
 
 <!-- LINK 3 IMAGE GRID-->
-    <section id="visuals" class="content-section" >
-        <h2>visuals</h2>
-        <br>
-        <div class="grid-container">
-            
-            <!-- ROW ONE-->
-            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
-            <video src="images/Circle_Lights-2025-0001-0240.mp4"    
-               data-full-src="images/Circle_Lights-2025-0001-0240.mp4" 
-               muted loop playsinline 
-               onclick="openLightbox(this)">
-            </video>              
-            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
+    <section id="visuals" class="content-section" >
+        <h2>visuals</h2>
+        <br>
+        <div class="grid-container">
+            
+            <!-- ROW ONE-->
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
+            <video src="images/Circle_Lights-2025-0001-0240.mp4"    
+               data-full-src="images/Circle_Lights-2025-0001-0240.mp4" 
+               muted loop playsinline 
+               onclick="openLightbox(this)">
+            </video>              
+            <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)">   
 
-            <!-- ROW TWO -->
-  
-            <!-- ROW THREE -->
-            <img src="images/design/orb-biome-dunes-4k-2-.png" data-full-src="images/design/orb-biome-dunes-4k-2-.png" onclick="openLightbox(this)">   
-            <img src="images/design/orb-biome-grass-4k-2-.png" data-full-src="images/design/orb-biome-grass-4k-2-.png" onclick="openLightbox(this)"> 
-            <img src="images/design/orb-biome-tundra-3-4k-2-.png" data-full-src="images/design/orb-biome-tundra-3-4k-2-.png" onclick="openLightbox(this)"> 
-            
-        </div> 
-    </section>
+            <!-- ROW TWO -->
+  
+            <!-- ROW THREE -->
+            <img src="images/design/orb-biome-dunes-4k-2-.png" data-full-src="images/design/orb-biome-dunes-4k-2-.png" onclick="openLightbox(this)">   
+            <img src="images/design/orb-biome-grass-4k-2-.png" data-full-src="images/design/orb-biome-grass-4k-2-.png" onclick="openLightbox(this)"> 
+            <img src="images/design/orb-biome-tundra-3-4k-2-.png" data-full-src="images/design/orb-biome-tundra-3-4k-2-.png" onclick="openLightbox(this)"> 
+            
+        </div> 
+    </section>
 
 <!-- LINK 4 IMAGE GRID-->
-        <div style="height: 100px;"></div>
-            <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
-            <br>
-            <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
-        </div>
-    
+        <div style="height: 100px;"></div>
+            <p>&ensp; &ensp; <small><i>design by: artsandtoys</i></small></p>
+            <br>
+            <p>&ensp; &ensp; <a href="#"><b><i>Fin.</i></b></a></p>
+        </div>
+    
 </div>
 
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-image" style="max-width:90%; display:none;" src="">
-    <video id="lightbox-video" style="max-width:90%; display:none;" controls autoplay loop></video>
+    <img id="lightbox-image" style="max-width:90%; display:none;" src="">
+    <video id="lightbox-video" style="max-width:90%; display:none;" controls autoplay loop></video>
 </div>
 
 <div id="columnPopup">
-  <button id="prevBtn" class="gallery-btn">&#10094;</button>
-  <div id="mediaContainer"></div>
-  <button id="nextBtn" class="gallery-btn">&#10095;</button>
+  <button id="prevBtn" class="gallery-btn">&#10094;</button>
+  <div id="mediaContainer"></div>
+  <button id="nextBtn" class="gallery-btn">&#10095;</button>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-link');
+    document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); 
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
 
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const offset = window.innerHeight * 0.16; 
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offset = window.innerHeight * 0.16; 
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
-        });
-    });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
 
-    const popup = document.querySelector('#columnPopup');
-    const mediaContainer = document.querySelector('#mediaContainer');
-    const prevBtn = document.querySelector('#prevBtn');
-    const nextBtn = document.querySelector('#nextBtn');
-    let currentGallery = [];
-    let currentIndex = 0;
+    const popup = document.querySelector('#columnPopup');
+    const mediaContainer = document.querySelector('#mediaContainer');
+    const prevBtn = document.querySelector('#prevBtn');
+    const nextBtn = document.querySelector('#nextBtn');
+    let currentGallery = [];
+    let currentIndex = 0;
 
-    function showMedia(index) {
-        mediaContainer.innerHTML = '';
-        const src = currentGallery[index];
-        const img = document.createElement('img');
-        img.src = src;
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '80vh';
-        mediaContainer.appendChild(img);
-        currentIndex = index;
-    }
+    function showMedia(index) {
+        mediaContainer.innerHTML = '';
+        const src = currentGallery[index];
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '80vh';
+        mediaContainer.appendChild(img);
+        currentIndex = index;
+    }
 
-    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            currentGallery = trigger.dataset.images.split(',').map(s => s.trim());
-            showMedia(0);
-            popup.style.display = 'flex';
-        });
-    });
+    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentGallery = trigger.dataset.images.split(',').map(s => s.trim());
+            showMedia(0);
+            popup.style.display = 'flex';
+        });
+    });
 
-    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showMedia(currentIndex); });
-    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
-    popup.addEventListener('click', () => { popup.style.display = 'none'; });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showMedia(currentIndex); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
+    popup.addEventListener('click', () => { popup.style.display = 'none'; });
 
-    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
 // UPDATED LIGHTBOX LOGIC
 function openLightbox(el) {
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-image');
-    const lbVideo = document.getElementById('lightbox-video');
-    const src = el.getAttribute('data-full-src');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-image');
+    const lbVideo = document.getElementById('lightbox-video');
+    const src = el.getAttribute('data-full-src');
 
-    // Reset visibility and video state
-    lbImg.style.display = 'none';
-    lbVideo.style.display = 'none';
-    lbVideo.pause();
+    // Reset visibility and video state
+    lbImg.style.display = 'none';
+    lbVideo.style.display = 'none';
+    lbVideo.pause();
 
-    if (el.tagName === 'VIDEO') {
-        lbVideo.src = src;
-        lbVideo.style.display = 'block';
-        lbVideo.play();
-    } else {
-        lbImg.src = src;
-        lbImg.style.display = 'block';
-    }
+    if (el.tagName === 'VIDEO') {
+        lbVideo.src = src;
+        lbVideo.style.display = 'block';
+        lbVideo.play();
+    } else {
+        lbImg.src = src;
+        lbImg.style.display = 'block';
+    }
 
-    lb.style.display = 'flex';
+    lb.style.display = 'flex';
 }
 
 function closeLightbox() {
-    const lb = document.getElementById('lightbox');
-    const lbVideo = document.getElementById('lightbox-video');
-    
-    lb.style.display = 'none';
-    lbVideo.pause(); // Prevent audio from playing after closing
-    lbVideo.src = ""; // Clean up source
+    const lb = document.getElementById('lightbox');
+    const lbVideo = document.getElementById('lightbox-video');
+    
+    lb.style.display = 'none';
+    lbVideo.pause(); // Prevent audio from playing after closing
+    lbVideo.src = ""; // Clean up source
 }
 </script>
-    
+    
 </body>
-    
+    
 </html>

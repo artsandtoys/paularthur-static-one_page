@@ -12,7 +12,6 @@ html {
     scroll-behavior: smooth;
 }
 
- /* BASE STYLES */
 body {
     background-color: #000;
     color: #fff;
@@ -30,6 +29,7 @@ h1, h2 {
     margin-bottom: 0;
 }
 
+/* MAIN CONTAINER */
 .main-container {
     width: 75%;
     max-width: 1200px;
@@ -40,7 +40,7 @@ h1, h2 {
     align-items: flex-start;
 }
 
-/* STICKY NAV */
+/* LEFT COLUMN */
 .left-column {
     flex-basis: 33.33%;
     flex-shrink: 0;
@@ -59,20 +59,15 @@ h1, h2 {
     margin-top: 14vh;
 }
 
-.left-content h1, .left-content h2 {
-    margin: 0;
-}
-
 .description-text {
     color: #ddd;
     font-size: 16px;
-    font-weight: normal;
     line-height: 1.5;
     margin-top: 16px;
     margin-bottom: 16px;
 }
 
-/* LEFT NAV LINKS */
+/* NAV LINKS */
 .left-content nav a {
     color: #fff;
     text-decoration: none;
@@ -80,6 +75,7 @@ h1, h2 {
     margin: 10px 0;
     padding: 5px 0px;
     transition: color 0.3s;
+    font-weight: normal; 
 }
 
 .left-content nav a:hover {
@@ -87,15 +83,17 @@ h1, h2 {
 }
 
 .left-content nav a.active {
-    color: #b3ff00;
-    font-weight: bold;
+    color: #b3ff00 !important;
+    font-weight: bold !important;
 }
 
+/* RIGHT COLUMN */
 .right-column-wrapper {
     flex-basis: 66.66%;
     flex-grow: 1;
-    margin-top: 16.5vh; /* forgot original */
-    padding-left: 20px; 
+    margin-top: 0.5vh;
+    padding-top: 16vh;
+    padding-left: 20px;
     box-sizing: border-box;
     position: relative;
 }
@@ -104,43 +102,23 @@ h1, h2 {
     margin: 0 0 8px 0;
 }
 
-/* SPLASH IMAGE STYLES */
-.home-image-container {
-    width: 100%;
-    line-height: 0; /* Prevents extra space below the image */
-}
-
-/* SPLASH IMAGE IMAGE */
-.home-image-container img {
-    display: block;
-    width: 100%;
-    margin-top: .5vh; /* forgot original */
-    height: auto;
-    object-fit: cover;
-}
-
-/* spacing T, L, B, R */
-.content-section {
-    padding: 32px 0;
-}
-
-/* content loaded into the right column */
-.content-section p, 
-.right-column-wrapper p {
+#about-me p, .right-column-wrapper p {
     color: #ddd;
     line-height: 1.5;
     margin-bottom: 16px;
-    /* KEY FOR SPACING */
-    /* white-space: pre-wrap; */
 }
 
-/* spacing T, L, B, R */
+.content-section {
+    padding: 32px 0;
+    scroll-margin-top: 18vh; 
+}
+
+/* TIMELINE */
 .timeline {
     position: relative;
-    padding: 2px 0 0px 30px;
+    padding: 20px 0 2px 30px;
 }
 
-/* leftside line */
 .timeline::before {
     content: '';
     position: absolute;
@@ -158,16 +136,18 @@ h1, h2 {
     padding: 0 0 0 20px;
     text-decoration: none;
     color: #fff;
-    transition: color 0.3s ease;
 }
 
-/*
-.timeline-item-link:hover {
-    color: #b3ff00;
-    cursor: pointer;
+/* Only highlight the Title and Dot, not the Date
+.timeline-title {
+    transition: color 0.3s ease;
 } 
-*/
 
+.timeline-item-link:hover .timeline-title {
+    color: #b3ff00; 
+}
+ */
+    
 .timeline-item-link::before {
     content: '';
     position: absolute;
@@ -178,7 +158,6 @@ h1, h2 {
     background: #b3ff00;
     border-radius: 50%;
     z-index: 1;
-    /* This makes the "grow" look smooth */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -188,197 +167,56 @@ h1, h2 {
 }
 
 .timeline-date {
-    color: #ccc;
+    color: #ccc; 
 }
 
-/* POPUP GALLERY STYLES */
+/* POPUP GALLERY */
 #columnPopup {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; 
-    cursor: pointer;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none; justify-content: center; align-items: center;
+  z-index: 2000;
 }
 
-#columnPopup img,
-#columnPopup video { 
-    max-width: 90%; 
-    max-height: 90%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    object-fit: contain;
-    opacity: 1; 
-    transition: opacity 0.3s ease;
-    cursor: default; 
+#mediaContainer {
+    max-width: 85%; max-height: 85%;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .gallery-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2em;
-    cursor: pointer;
-    padding: 20px;
-    user-select: none;
-    z-index: 10000;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #fff; font-size: 2.5em;
+  cursor: pointer; padding: 20px; z-index: 10000;
 }
 
-#prevBtn { 
-    left: 30px; 
-}
+#prevBtn { left: 30px; }
+#nextBtn { right: 30px; }
 
-#nextBtn { 
-    right: 30px; 
-}
-
-.gallery-btn:hover {
-    color: #b3ff00;
-}
-
-/* --- 1. Corrected Grid Container (using CSS Grid) --- */
+/* GRID */
 .grid-container {
-    /* Layout: CSS Grid is the proper tool for a strict 9x9 layout */
     display: grid;
-    /* This creates exactly 9 columns, each taking up an equal fraction (1fr) of the space */
     grid-template-columns: repeat(3, 1fr); 
-    
-    /* Spacing: Creates a consistent gap between grid items */
-    gap: 5px; 
-
-    /* Alignment & Sizing */
-    margin: 0 0 0 auto; /* Aligns the entire container to the right */
-    width: 90vw;
-    max-width: 800px; 
+    gap: 10px; max-width: 800px; 
 }
 
-/* --- 2. Image Styling --- */
 .grid-container img {
-    /* In CSS Grid, the image width is handled automatically by the '1fr' columns. 
-       We only need to ensure the image fills its grid cell and has square dimensions. */
-    width: 100%; 
-    /* Important: This ensures the image fills the 1fr height */
-    /* height: 100%; */ 
-    /* Optional: Forces cells to be square for a classic grid look */
-    /* aspect-ratio: 1 / 1; */ 
-    
-    cursor: pointer;
-    display: block;
-    object-fit: cover; /* Ensures the image covers the area of the cell */
+    width: 100%; cursor: pointer; object-fit: cover;
 }
 
-/* --- 3. Lightbox Styling (Improvements) --- */
 .lightbox {
-    /* Use 'fixed' to cover the whole viewport, regardless of scrolling */
-    position: fixed; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    
-    /* Display: Use flex to center the content */
-    display: none; 
-    justify-content: center; 
-    align-items: center; 
-    
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed; left: 0; top: 0; width: 100%; height: 100%; 
+    display: none; justify-content: center; align-items: center; 
+    z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
 }
 
-.lightbox-content {
-    display: block;
-    max-width: 50%; 
-    /* Ensures the image respects the height of the viewport */
-    /*max-height: 90vh;*/
-    object-fit: contain; /* Prevents the image from being cropped */
+/* MOBILE */
+@media (max-width: 800px) {
+    .main-container { width: 90%; flex-direction: column; }
+    .left-column { position: static; width: 100%; height: auto; }
+    .left-content nav a { display: inline-block; margin-right: 15px; }
+    .grid-container { grid-template-columns: 1fr; }
 }
-
-@media screen and (max-width: 768px) {
-
-    /* 1. Stack the Main Container */
-    .main-container {
-        width: 90%;
-        flex-direction: column; /* Stacks Left Column on top of Right Column */
-        padding-bottom: 12px;
-    }
-
-    /* 2. Reset Left Column (Header area) */
-    .left-column {
-        flex-basis: auto;
-        width: 100%;
-        height: auto;
-        position: relative; /* Removes sticky behavior */
-        padding-right: 0;
-        margin-bottom: 8px; /* Small space before content starts */
-    }
-
-    .left-content {
-        width: 100%;
-        margin-top: 40px;
-    }
-    
-    .grid-container {
-        /* Change to a single column */
-        grid-template-columns: 1fr; 
-        gap: 5px; 
-        margin: 0;
-    }
-    
-    /* Optional: If you want to center the container when it's narrow */
-    .grid-container {
-        max-width: 99%; /* Give it 5% margin space on small screens */
-    }
-    
-    /* --- HORIZONTAL NAV (Plain Text) --- */
-    .left-content nav {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 6px; /* Space between links */
-        margin-top: 12px;
-    }
-
-    .left-content nav a {
-        display: inline-block;
-        margin: 0; /* Removes vertical spacing */
-        padding: 5px 0;
-    }
-    /* ----------------------------------- */
-
-    /* 3. Reset Right Column (Content) */
-    .right-column-wrapper {
-        flex-basis: auto;
-        width: 100%;
-        margin-top: 0;
-        padding-left: 0;
-    }
-
-    /* 4. General Fixes */
-    .home-image-container img {
-        margin-top: 0;
-    }
-
-    .timeline {
-        padding-left: 20px;
-    }
-
-    /* Gallery Mobile Controls */
-    #prevBtn { left: 10px; }
-    #nextBtn { right: 10px; }
-    .gallery-btn {
-        padding: 10px;
-        background: rgba(0,0,0,0.5);
-        border-radius: 5px;
-    }
-}
-
 </style>
 </head>
 
@@ -455,11 +293,11 @@ h1, h2 {
 
             <!-- ROW ONE-->
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
-            <video src="images/Circle_Lights-2025-0001-0240.mp4"    
+            <video src="images/Circle_Lights-2025-0001-0240.mp4"    
                data-full-src="images/Circle_Lights-2025-0001-0240.mp4" 
                muted loop playsinline 
                onclick="openLightbox(this)">
-            </video>  
+            </video>             
             <img src="images/level-cybersprint++.png" data-full-src="images/level-cybersprint++.png" onclick="openLightbox(this)"> 
 
             <!-- ROW TWO--> 
@@ -488,266 +326,64 @@ h1, h2 {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    // -----------------------------------------------------------------
-    // 1. GLOBAL ELEMENT SELECTORS
-    // -----------------------------------------------------------------
-
-    const rightColumn = document.querySelector('.right-column-wrapper');
-    const navLinks = document.querySelectorAll('.left-content nav a.nav-link');
-    
-    // Selectors for elements that might be hidden when dynamic content loads
-    const defaultSplash = document.getElementById('splash-content'); // (Not used in the provided HTML, but kept for context)
-    const staticFooter = document.getElementById('static-footer');    // (Not used in the provided HTML, but kept for context)
-    
-    // GALLERY STATE VARIABLES
-    let currentGallery = [];
-    let currentIndex = 0;
-    let keyboardListenerAdded = false;
-
-    // -----------------------------------------------------------------
-    // 2. CORE UTILITY FUNCTIONS
-    // -----------------------------------------------------------------
-
-    /**
-     * Removes the 'active' class from all navigation links.
-     */
-    function removeActiveClasses() {
-        navLinks.forEach(link => link.classList.remove('active'));
-    }
-
-    /**
-     * Hides default content elements (splash/footer) and clears the right column.
-     * This prepares the column for new content loaded via fetch.
-     */
-    function hideDefaultContent() {
-        if (defaultSplash) defaultSplash.style.display = 'none';
-        if (staticFooter) staticFooter.style.display = 'none';
-        
-        // Clear previous content
-        rightColumn.innerHTML = ''; 
-    }
-
-    /**
-     * Fetches an HTML file, injects it into the right column, and re-attaches events.
-     * @param {string} fileName - The name of the HTML file to load.
-     */
-    async function loadContent(fileName) {
-        // 1. Prepare the column
-        hideDefaultContent(); 
-        
-        try {
-            const response = await fetch(fileName);
-            if (!response.ok) {
-                throw new Error(`Failed to load content file: ${fileName}`);
-            }
-            const htmlContent = await response.text();
-
-            // 2. Insert new HTML and scroll to top
-            rightColumn.innerHTML = htmlContent;
-            window.scrollTo(0, 0); 
-
-            // 3. Re-attach gallery event listeners (CRITICAL for dynamically loaded content)
-            attachGalleryTriggers(); 
-
-        } catch (error) {
-            console.error('Content loading error:', error);
-            rightColumn.innerHTML = `<h2>Error</h2><p>Could not load content for ${fileName}. Please ensure <code>${fileName}</code> exists in the same directory.</p>`;
-        }
-    }
-
-    // -----------------------------------------------------------------
-    // 3. GALLERY / POP-UP LOGIC
-    // -----------------------------------------------------------------
-
-    /**
-     * Stops any currently playing video and removes all media (img/video) 
-     * from the pop-up container to prepare for the next item.
-     * @param {HTMLElement} popup - The gallery pop-up container element.
-     */
-    function clearMedia(popup) {
-        popup.querySelectorAll('img, video').forEach(el => {
-            if (el.tagName && el.tagName.toLowerCase() === 'video') {
-                try { el.pause(); } catch (err) {}
-                el.removeAttribute('src');
-            }
-            el.remove();
-        });
-    }
-
-    /**
-     * Loads and displays the image or video at the current index in the pop-up.
-     * @param {HTMLElement} popup - The gallery pop-up container.
-     * @param {HTMLElement} prevBtn - The previous button element (used for positioning).
-     * @param {HTMLElement} nextBtn - The next button element (used for positioning).
-     * @param {number} index - The index of the media in the currentGallery array.
-     */
-    function showMedia(popup, prevBtn, nextBtn, index) {
-        clearMedia(popup);
-        const src = currentGallery[index];
-        if (!src) return;
-
-        const isVideo = src.match(/\.(mp4|webm)(\?.*)?$/i);
-        // Media is inserted before the next button to keep buttons visible on top
-        const insertionPoint = nextBtn; 
-
-        if (isVideo) {
-            const video = document.createElement('video');
-            video.src = src;
-            video.controls = true;
-            video.autoplay = true;
-            video.muted = true;
-            video.loop = true;
-            video.playsInline = true;
-            video.style.maxWidth = '100%';
-            video.maxHeight = '100%';
-            // Insert video element into the popup
-            popup.insertBefore(video, insertionPoint);
-
-            video.addEventListener('error', (ev) => console.warn('Video error', ev));
-            video.play().catch(err => {
-                console.warn('Play promise rejected:', err);
-            });
-        } else {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = 'Gallery image';
-            img.style.maxWidth = '100%';
-            img.maxHeight = '100%';
-            // Insert image element into the popup
-            popup.insertBefore(img, insertionPoint);
-        }
-        
-        // Update current index after successful display
-        currentIndex = index;
-    }
-    
-    /**
-     * Defines and attaches all event listeners for the gallery pop-up.
-     * This function MUST be run for both initial content AND after loading new content.
-     */
-    function attachGalleryTriggers() {
-        // Find the pop-up elements inside the currently loaded content
-        // The ID columnPopup is in your main HTML for the 'works' section
-        const popup = document.querySelector('#columnPopup'); 
-        if (!popup) return;
-
-        const prevBtn = popup.querySelector('#prevBtn');
-        const nextBtn = popup.querySelector('#nextBtn');
-        
-        // Define the click handler for the timeline links
-        const galleryTriggerHandler = function(e) {
-            e.preventDefault();
-            
-            // 1. Parse the list of images/videos from the data attribute
-            currentGallery = e.currentTarget.dataset.images.split(',').map(x => x.trim()).filter(x => x.length);
-            currentIndex = 0; // Always start at the first item
-            
-            // 2. Show the first piece of media and display the pop-up
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
-            popup.style.display = 'flex';
-        };
-
-        // Attach click listeners to all timeline items with the 'gallery-trigger' class
-        document.querySelectorAll('.gallery-trigger').forEach(item => {
-            // Remove previous listeners (needed when content is reloaded)
-            item.removeEventListener('click', galleryTriggerHandler); 
-            item.addEventListener('click', galleryTriggerHandler);
-        });
-        
-        // ATTACH NAV BUTTON EVENTS
-        nextBtn.onclick = (e) => {
-            e.stopPropagation(); // Prevent background click from closing
-            if (!currentGallery.length) return;
-            currentIndex = (currentIndex + 1) % currentGallery.length; // Loop to start
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
-        };
-
-        prevBtn.onclick = (e) => {
-            e.stopPropagation(); // Prevent background click from closing
-            if (!currentGallery.length) return;
-            // Loop to end if moving back from the start
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; 
-            showMedia(popup, prevBtn, nextBtn, currentIndex);
-        };
-
-        // ATTACH CLOSE EVENT (Close when clicking the semi-transparent background)
-        popup.onclick = (e) => {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-                const vid = popup.querySelector('video');
-                if (vid) vid.pause();
-                clearMedia(popup); 
-            }
-        };
-
-        // ATTACH KEYBOARD EVENTS (Add only once to the document)
-        if (!keyboardListenerAdded) {
-            document.addEventListener('keydown', keyboardHandler);
-            keyboardListenerAdded = true;
-        }
-    }
-    
-    /**
-     * Handles keyboard shortcuts for the pop-up (Escape to close, Arrows to navigate).
-     */
-    function keyboardHandler(e) {
-        const popup = document.querySelector('#columnPopup'); 
-        
-        if (popup && popup.style.display === 'flex') {
-            const prevBtn = popup.querySelector('#prevBtn');
-            const nextBtn = popup.querySelector('#nextBtn');
-            
-            if (e.key === 'Escape') {
-                // Manually trigger the background close action
-                popup.click(); 
-            }
-            if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
-            if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
-        }
-    }
-
-    // -----------------------------------------------------------------
-    // 4. EVENT ATTACHMENT / INITIALIZATION
-    // -----------------------------------------------------------------
-
-    // --- NAV LINK CLICK HANDLER ---
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
+            e.preventDefault(); 
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
 
-            const contentFile = this.getAttribute('data-content-file');
-            if (contentFile) {
-                loadContent(contentFile);
-                
-                removeActiveClasses();
-                this.classList.add('active');
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offset = window.innerHeight * 0.16; 
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         });
     });
-    
-    // 🚀 THE FIX: INITIALIZE GALLERY FOR DEFAULT CONTENT
-    // This is the critical addition to make the 'works' section (present on load) functional.
-    attachGalleryTriggers();
-    
-    // --- Disable right-click on the entire page --- 
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        alert("Right-click is disabled on this page.");
+
+    const popup = document.querySelector('#columnPopup');
+    const mediaContainer = document.querySelector('#mediaContainer');
+    const prevBtn = document.querySelector('#prevBtn');
+    const nextBtn = document.querySelector('#nextBtn');
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function showMedia(index) {
+        mediaContainer.innerHTML = '';
+        const src = currentGallery[index];
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '80vh';
+        mediaContainer.appendChild(img);
+        currentIndex = index;
+    }
+
+    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentGallery = trigger.dataset.images.split(',').map(s => s.trim());
+            showMedia(0);
+            popup.style.display = 'flex';
+        });
     });
+
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentGallery.length; showMedia(currentIndex); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showMedia(currentIndex); });
+    popup.addEventListener('click', () => { popup.style.display = 'none'; });
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
 });
 
-
-// =================================================================
-// SECONDARY LIGHTBOX FUNCTIONS (FOR GRID CONTENT, IF USED)
-// =================================================================
-// These functions appear to be for a separate image grid (e.g., in snaps.html)
-// and rely on a different lightbox structure than the timeline pop-up (#columnPopup).
-
-/**
- * Opens a simple image lightbox used for grid elements.
- * @param {HTMLElement} element - The grid image element that was clicked.
- */
 function openLightbox(element) {
     const lightbox = document.getElementById('lightbox');
     const fullSrc = element.getAttribute('data-full-src');

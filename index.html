@@ -201,12 +201,53 @@ h1, h2 {
     z-index: 3000; background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* MOBILE */
+/* MOBILE OPTIMIZATIONS */
 @media (max-width: 800px) {
-    .main-container { width: 90%; flex-direction: column; }
-    .left-column { position: static; width: 100%; height: 15px; }
-    .left-content nav a { display: inline-block; margin-right: 15px; }
-    .grid-container { grid-template-columns: 1fr; }
+    .main-container { 
+        width: 92%; 
+        flex-direction: column; 
+    }
+
+    .left-column { 
+        position: static; 
+        width: 100%; 
+        height: auto; /* Changed from 15px to allow content to fit */
+        padding-right: 0;
+    }
+
+    .left-content {
+        width: 100%;
+        margin-top: 40px; /* Reduced from 14vh */
+        text-align: left;
+    }
+
+    .right-column-wrapper {
+        width: 100%;
+        padding-top: 20px; /* Reduced from 16vh */
+        padding-left: 0;
+        margin-top: 0;
+    }
+
+    .content-section {
+        padding: 20px 0; /* Tightened section spacing */
+        scroll-margin-top: 20px; /* Adjusts where the page lands when clicking nav */
+    }
+
+    .left-content nav {
+        margin-top: 10px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+    }
+
+    .left-content nav a { 
+        display: inline-block; 
+        margin-right: 15px; 
+    }
+
+    .grid-container { 
+        grid-template-columns: 1fr; /* Stack images on mobile */
+        gap: 20px;
+    }
 }
 </style>
 </head>

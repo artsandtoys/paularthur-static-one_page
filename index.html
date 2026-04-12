@@ -750,31 +750,47 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function openLightbox(element) {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-
     const fullSrc = element.getAttribute('data-full-src');
-    if (!fullSrc) {
-        console.error('Image element missing data-full-src attribute.');
-        return;
+    
+    // Clear previous content
+    lightbox.innerHTML = ''; 
+
+    // Check if the source is a video
+    const isVideo = fullSrc.match(/\.(mp4|webm|ogg)$/i);
+
+    if (isVideo) {
+        const video = document.createElement('video');
+        video.src = fullSrc;
+        video.controls = true;
+        video.autoplay = true;
+        video.style.maxWidth = "90%";
+        video.id = "lightbox-media";
+        lightbox.appendChild(video);
+    } else {
+        const img = document.createElement('img');
+        img.src = fullSrc;
+        img.style.maxWidth = "90%";
+        img.id = "lightbox-media";
+        lightbox.appendChild(img);
     }
 
-    lightboxImage.src = fullSrc;
-    lightbox.style.display = 'flex'; 
-
+    lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden'; 
 }
 
-/**
- * Closes the simple image lightbox.
- */
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
+    const media = document.getElementById('lightbox-media');
     
+    // If it's a video, stop it before closing
+    if (media && media.tagName === 'VIDEO') {
+        media.pause();
+        media.src = "";
+        media.load();
+    }
+
     lightbox.style.display = 'none';
-    
     document.body.style.overflow = '';
-    
-    document.getElementById('lightbox-image').src = '';
 }
 </script>
     

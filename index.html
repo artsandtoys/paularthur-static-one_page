@@ -226,10 +226,52 @@ h1, h2 {
 
 /* MOBILE */
 @media (max-width: 800px) {
-    .main-container { width: 90%; flex-direction: column; }
-    .left-column { position: static; width: 100%; height: auto; }
-    .left-content nav a { display: inline-block; margin-right: 15px; }
-    .grid-container { grid-template-columns: 1fr; }
+    /* 1. Force the container to stop stretching columns to match height */
+    body, .main-container {
+        display: block !important; 
+        height: auto !important;
+    }
+
+    .main-container {
+        width: 90%;
+    }
+
+    /* 2. Unstick the sidebar and remove the 90vh height constraint */
+    .left-column {
+        position: relative !important;
+        height: auto !important;
+        width: 100%;
+        padding-right: 0;
+        top: 0;
+    }
+
+    /* 3. Replace VH margins with small, fixed pixel gaps */
+    .left-content {
+        margin-top: 30px; /* Reduced from 14vh */
+    }
+
+    .right-column-wrapper {
+        padding-top: 20px; /* This is the main fix for the "Dead Space" */
+        padding-left: 0;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .content-section {
+        padding-bottom: 30px;
+        scroll-margin-top: 30px;
+    }
+
+    /* 4. Collapse the grid to a single column */
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* 5. Adjust navigation for mobile flow */
+    nav a {
+        display: inline-block;
+        margin-right: 15px;
+    }
 }
 </style>
 </head>

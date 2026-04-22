@@ -386,11 +386,11 @@ h1, h2 {
             
             <!-- ROW THREE--> 
             <img src="images/screenshots/PA-Cyberspace_Station-ORB-SS-01.png" data-full-src="images/screenshots/PA-Cyberspace_Station-ORB-SS-01.png" onclick="openLightbox(this)"> 
+                        <img src="images/screenshots/PA-Cyberspace_Station-ORB-SS-03.png" data-full-src="images/screenshots/PA-Cyberspace_Station-ORB-SS-03.png" onclick="openLightbox(this)"> 
             <img src="images/screenshots/PA-Cyberspace_Station-ORB-SS-02.png" data-full-src="images/screenshots/PA-Cyberspace_Station-ORB-SS-02.png" onclick="openLightbox(this)"> 
-            <img src="images/screenshots/PA-Cyberspace_Station-ORB-SS-03.png" data-full-src="images/screenshots/PA-Cyberspace_Station-ORB-SS-03.png" onclick="openLightbox(this)"> 
 
             <!-- ROW FOUR--> 
-             <video src="images/screenshots/Clip One QT.mov" 
+             <video src="images/screenshots/Clip One QT.mp4" 
             poster=""
             muted 
             loop 
@@ -402,7 +402,7 @@ h1, h2 {
                         
             <img src="images/design/cyberspace_station-orb-front-4k-.png" data-full-src="images/design/cyberspace_station-orb-front-4k-.png" onclick="openLightbox(this)"> 
 
-             <video src="images/screenshots/Clip Two QT.mov" 
+             <video src="images/screenshots/Clip Two QT.mp4" 
             poster=""
             muted 
             loop 
@@ -504,7 +504,7 @@ function openLightbox(element) {
     lightbox.innerHTML = ''; 
 
     // Check if the source is a video
-    const isVideo = fullSrc.match(/\.(mov|mp4|webm|ogg)$/i);
+    const isVideo = fullSrc.match(/\.(mp4|webm|ogg)$/i);
 
     if (isVideo) {
         const video = document.createElement('video');

@@ -499,7 +499,7 @@ function openLightbox(element) {
     lightbox.innerHTML = ''; 
 
     // Check if the source is a video
-    const isVideo = fullSrc.match(/\.(mp4|webm|ogg)$/i);
+    const isVideo = fullSrc.match(/\.(mov|mp4|webm|ogg)$/i);
 
     if (isVideo) {
         const video = document.createElement('video');

@@ -208,7 +208,39 @@ h1, h2 {
 .grid-container img, .grid-container video {
     width: 100%; cursor: pointer; object-fit: cover;
 }
+    
+/* IMG HOVER BLUR */
+.grid-item:hover img,
+.grid-item:hover video {
+    filter: blur(4px) brightness(0.7);
+    transform: scale(1.03);
+}
+    
+/* IMG HOVER TEXT (alt text display) */
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; /**/
+    max-width: 75%; /**/
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
 
+.grid-item:hover .overlay-text {
+    opacity: 1;
+}
+    
 /* POPUP */
 .lightbox {
     position: fixed;
